@@ -13,7 +13,7 @@ const Footer = () => {
         {/* Decorative flower image - bottom left */}
         <div className='absolute bottom-0 left-0 w-64 h-64 opacity-80'>
           <img
-            src="/flowers.png"
+            src="/footer.png"
             alt="Decorative flowers"
             className='w-full h-full object-contain'
           />
@@ -24,14 +24,13 @@ const Footer = () => {
           {/* Brand Section */}
           <div>
             <div className='flex items-center gap-3 mb-6'>
-              <div className='bg-white w-16 h-16 rounded-full flex items-center justify-center overflow-hidden shadow-md border-2 border-gray-300'>
+              <div className=' w-16 h-16  flex items-center justify-center overflow-hidden '>
                 <img
                   src="/logo.png"
                   alt="Logo"
-                  className='w-10 h-10 object-cover'
+                  className='w-20 h-20 object-cover'
                 />
               </div>
-              <h1 className='text-3xl font-bold tracking-wide text-gray-900'>Mo</h1>
             </div>
           </div>
 
