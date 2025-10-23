@@ -6,7 +6,7 @@ const MyWhatsapp = () => {
         <>
             <FloatingWhatsApp
                 phoneNumber='7994237001'
-                accountName='POKY'
+                accountName='MOFK'
                 notification="true"
                 darkMode='true'
                 avatar='logo.png'

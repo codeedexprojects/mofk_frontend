@@ -169,7 +169,7 @@ const UserNavbar = () => {
                         <div className="flex-1 flex justify-center">
                             <div className="!w-32">
                                 <Link to='/'>
-                                    <img src="/logo.png" alt="POKY" className='w-12 h-12 object-contain' />
+                                    <img src="/logo.png" alt="MOFK" className='w-12 h-12 object-contain' />
                                 </Link>
                             </div>
                         </div>
@@ -234,7 +234,7 @@ const UserNavbar = () => {
                     </button>
 
                     <Link to="/" className="w-24 cursor-pointer">
-                        <img src="/logo.png" alt="POKY" className="w-12 h-12 object-contain" />
+                        <img src="/logo.png" alt="MOFK" className="w-12 h-12 object-contain" />
                     </Link>
                 </div>
 

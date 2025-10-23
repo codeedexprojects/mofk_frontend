@@ -35,7 +35,7 @@ export default function ContactForm() {
 *Message:*
 ${formData.message}
 
-*Sent via Poky Store Website*
+*Sent via Mofk Store Website*
         `.trim();
 
         
@@ -88,12 +88,12 @@ ${formData.message}
 
                                     <div className="flex items-center gap-4">
                                         <Mail className="w-5 h-5" />
-                                        <span>pokyonline@gmail.com</span>
+                                        <span>mofkonline@gmail.com</span>
                                     </div>
 
                                     <div className="flex items-start gap-4">
                                         <MapPin className="w-5 h-5 mt-1 flex-shrink-0" />
-                                        <span>Poky Store - Adam square, Angamaly - 680308</span>
+                                        <span>MOFK Store - Adam square, Angamaly - 680308</span>
                                     </div>
                                 </div>
 

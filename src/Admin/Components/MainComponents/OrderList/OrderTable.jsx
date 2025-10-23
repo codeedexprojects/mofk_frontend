@@ -41,13 +41,13 @@ const OrderTable = ({ orderList, setOrderList }) => {
   
   // Shop address - you can modify this as needed
   const SHOP_ADDRESS = {
-    name: "Poky",
-    address: "Poky Store - Adam square, Angamaly",
+    name: "Mofk",
+    address: "Mofk Store - Adam square, Angamaly",
     city: "Ernakulam",
     state: "Kerala",
     pincode: "680308",
     phone: "+91 79942 37001",
-    email: "pokyonline@gmail.com"
+    email: "mofkonline@gmail.com"
   };
 
   const handleEditTrackId = (trackId) => {

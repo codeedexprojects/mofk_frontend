@@ -114,8 +114,8 @@ const Checkout = () => {
             key: "rzp_live_RQW5bIanhHDdly",
             amount: orderResponse.amount,
             currency: orderResponse.currency,
-            name: "POKY",
-            description: "Welcome to Poky Store",
+            name: "MOFK",
+            description: "Welcome to MOFK Store",
             image: "/logo.png",
             order_id: orderResponse.razorpayOrderId,
             handler: async function (response) {

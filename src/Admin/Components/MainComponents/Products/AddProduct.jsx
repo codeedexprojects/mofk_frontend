@@ -979,7 +979,7 @@ const AddProduct = () => {
                             className='border-[1px] capitalize bg-gray-100/50 p-2 rounded-md 
                    placeholder:text-sm placeholder:font-light placeholder:text-gray-500 focus:outline-none'>
                             <option value="">Select Manufacturer</option>
-                            <option value="POKY">POKY</option>
+                            <option value="MOFK">MOFK</option>
                         </select>
                     </div>
 
@@ -993,7 +993,7 @@ const AddProduct = () => {
                             className='border-[1px] capitalize bg-gray-100/50 p-2 rounded-md 
                    placeholder:text-sm placeholder:font-light placeholder:text-gray-500 focus:outline-none'>
                             <option value="">Select Brand</option>
-                            <option value="POKY">POKY</option>
+                            <option value="MOFK">MOFK</option>
                         </select>
                     </div>
 
@@ -1007,7 +1007,7 @@ const AddProduct = () => {
                             className='border-[1px] capitalize bg-gray-100/50 p-2 rounded-md 
                    placeholder:text-sm placeholder:font-light placeholder:text-gray-500 focus:outline-none'>
                             <option value="">Select Address</option>
-                            <option value="POKY">POKY</option>
+                            <option value="MOFK">MOFK</option>
                         </select>
                     </div>
 

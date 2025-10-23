@@ -48,7 +48,7 @@ const [chartToDelete, setChartToDelete] = useState(null);
                     Authorization: `Bearer ${token}`
                 };
 
-                const response = await axios.get("https://poky-web.netlify.app/api/admin/sizechart/get", { headers });
+                const response = await axios.get("https://mofk-backend.onrender.com/api/admin/sizechart/get", { headers });
                 setAdminSizeCharts(response.data);
                 setIsLoading(false);
             } catch (error) {
@@ -76,7 +76,7 @@ const [chartToDelete, setChartToDelete] = useState(null);
             };
     
             const response = await axios.delete(
-                `https://pokystore.in/api/admin/sizechart/delete/${chartToDelete._id}`,
+                `https://mofk-backend.onrender.com/api/admin/sizechart/delete/${chartToDelete._id}`,
                 { headers }
             );
     
