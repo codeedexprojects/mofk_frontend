@@ -93,11 +93,12 @@ const UserCarousel = () => {
                       initial={{ opacity: 0, y: -50 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8 }}
-                      className="text-white font-black uppercase leading-tight mb-4"
-                      style={{ fontSize: 'clamp(1.8rem, 5vw, 4rem)', letterSpacing: '0.02em' }}
+                      className="text-white font-black uppercase leading-tight mb-4 overflow-hidden "
+                      style={{ fontSize: 'clamp(1.5rem, 4vw, 2.8rem)', letterSpacing: '0.02em' }}
                     >
                       {slider.title}
                     </motion.h1>
+
 
                     {/* Description */}
                     {slider.label && (
@@ -105,7 +106,7 @@ const UserCarousel = () => {
                         initial={{ opacity: 0, y: -30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="text-white/90 text-base md:text-lg mb-8 max-w-xl mx-auto leading-relaxed"
+                        className="text-white text-base md:text-lg mb-8 max-w-xl mx-auto leading-relaxed"
                       >
                         {slider.label}
                       </motion.p>
@@ -127,9 +128,9 @@ const UserCarousel = () => {
                         initial={{ opacity: 0, scale: 0.8 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.8, delay: 0.6 }}
-                        className="bg-white text-black font-semibold capitalize tracking-wide
+                        className="bg-black text-white font-semibold capitalize tracking-wide
         py-3 px-8 md:py-4 md:px-10 rounded-full shadow-xl 
-        hover:bg-gray-100 transition-all duration-300 
+        hover:bg-black/80 transition-all duration-300 
         hover:scale-105 hover:shadow-2xl text-sm md:text-base"
                       >
                         Explore Now

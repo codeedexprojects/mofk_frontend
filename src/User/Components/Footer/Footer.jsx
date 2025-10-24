@@ -120,7 +120,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   className='text-gray-700 text-sm hover:text-gray-900 transition-colors block'
                 >
-                  Pooky village adam sark, andaman
+                  Mofk village adam sark, andaman
                 </a>
               </li>
             </ul>

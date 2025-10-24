@@ -54,6 +54,7 @@ import PricingPolicy from './User/Components/Footer/PricingPolicy'
 import MaterialsList from './Admin/Components/MainComponents/Material/AddMaterial';
 import ProductSpecifications from './Admin/Components/MainComponents/Specifications/AddSpecifications';
 import ContactForm from './User/Components/ContactUs/ContactForm';
+import SecondCarousel from './Admin/Components/MainComponents/SecondCarousel/SecondCarousel';
 
 
 const FullRoutes = () => {
@@ -119,6 +120,7 @@ const RoutesWithLocation = () => {
                     <Route path='category' element={<PrivateRoute><Category /></PrivateRoute>} />
                     <Route path='subcategory' element={<PrivateRoute><SubCategory /></PrivateRoute>} />
                     <Route path='admincarousel' element={<PrivateRoute><AdminCarousel /></PrivateRoute>} />
+                    <Route path='secondcarousel' element={<PrivateRoute><SecondCarousel /></PrivateRoute>} />
                     <Route path='orderlist' element={<PrivateRoute><OrderList /></PrivateRoute>} />
                     <Route path='coupon' element={<PrivateRoute><Coupons /></PrivateRoute>} />
                     <Route path='userslist' element={<PrivateRoute><UsersList /></PrivateRoute>} />
