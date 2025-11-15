@@ -110,27 +110,27 @@ export function LoginSignUpUser() {
 
             // Handle sign-up response
             if (!isLogin) {
-                navigate('/otp', { 
-                    state: { 
+                navigate('/otp', {
+                    state: {
                         email: loginFormData.email,
                         name: loginFormData.name,
                         phone: loginFormData.phone,
                         password: loginFormData.password,
                         isWalkIn: isWalkIn
-                    } 
+                    }
                 });
                 toast.success("Please check your email for OTP verification.");
             }
         } catch (error) {
             // Improved error handling
-            const errorMessage = error.response?.data?.msg || 
-                              error.response?.data?.error ||
-                              (isLogin 
-                                  ? "Login failed. Please check your credentials." 
-                                  : "Sign up failed. Please try again.");
-            
+            const errorMessage = error.response?.data?.msg ||
+                error.response?.data?.error ||
+                (isLogin
+                    ? "Login failed. Please check your credentials."
+                    : "Sign up failed. Please try again.");
+
             toast.error(errorMessage);
-            
+
         } finally {
             setIsSubmitting(false);
         }
@@ -153,7 +153,7 @@ export function LoginSignUpUser() {
                         ? "Welcome! Let's find your perfect style!"
                         : "Sign up to explore our collections!"}
                 </Typography>
-                
+
                 <form
                     className="mb-2 w-full"
                     onSubmit={handleAuthSubmit}
@@ -185,7 +185,7 @@ export function LoginSignUpUser() {
                                 />
                             </>
                         )}
-                        
+
                         <div className="flex items-center border-[1px] rounded-lg !border-gray-300 bg-white">
                             <span className="py-3 px-4 text-secondary cursor-default">+91</span>
                             <Input
@@ -202,7 +202,7 @@ export function LoginSignUpUser() {
                                 }}
                             />
                         </div>
-                        
+
                         <div className="flex items-center border-[1px] rounded-lg pr-3 !border-gray-300 bg-white">
                             <Input
                                 type={passwordVisible ? "text" : "password"}
@@ -228,7 +228,7 @@ export function LoginSignUpUser() {
                                 )}
                             </button>
                         </div>
-                        
+
                         {loginSignUpUser === "login" && (
                             <Link to='/forget-password' className="self-end">
                                 <Typography className="font-custom text-sm text-black font-medium">
@@ -237,7 +237,7 @@ export function LoginSignUpUser() {
                             </Link>
                         )}
                     </div>
-                    
+
                     {loginSignUpUser !== "login" && (
                         <>
                             <div className="flex items-center mb-2">
@@ -264,7 +264,7 @@ export function LoginSignUpUser() {
                             </div>
                         </>
                     )}
-                    
+
                     <Button
                         type="submit"
                         className="mt-2 bg-black font-custom text-sm font-normal capitalize hover:bg-secondary"
@@ -273,7 +273,7 @@ export function LoginSignUpUser() {
                     >
                         {isSubmitting ? "Processing..." : (loginSignUpUser === "login" ? "Sign in" : "Continue")}
                     </Button>
-                    
+
                     <Typography
                         color="gray"
                         className="mt-4 text-center text-secondary text-sm font-normal font-custom"
@@ -282,9 +282,11 @@ export function LoginSignUpUser() {
                             <>
                                 Don't have an account?{" "}
                                 <button
+                                    type="button"
                                     onClick={() => setLoginSignUpUser("signUp")}
-                                    className="font-medium text-black focus:outline-none"
+                                    className="font-medium text-black"
                                 >
+
                                     Sign Up
                                 </button>
                             </>
@@ -292,22 +294,24 @@ export function LoginSignUpUser() {
                             <>
                                 Already have an account?{" "}
                                 <button
+                                    type="button"
                                     onClick={() => setLoginSignUpUser("login")}
-                                    className="font-medium text-black focus:outline-none"
+                                    className="font-medium text-black"
                                 >
+
                                     Login
                                 </button>
                             </>
                         )}
                     </Typography>
-                    
+
                     <div className="flex flex-col items-center justify-center gap-4 mt-6">
                         <div className="flex items-center w-full">
                             <div className="flex-grow border-t border-gray-300"></div>
                             <span className="px-3 text-gray-500 font-medium text-sm">or continue with</span>
                             <div className="flex-grow border-t border-gray-300"></div>
                         </div>
-                        
+
                         <button
                             onClick={() => window.open(`${BASE_URL}/user/auth/google`, "_self")}
                             className="flex items-center justify-center gap-2 border border-gray-300 bg-white w-full text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-50 transition-colors"

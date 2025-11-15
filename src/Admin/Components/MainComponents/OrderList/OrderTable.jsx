@@ -38,7 +38,7 @@ const OrderTable = ({ orderList, setOrderList }) => {
   };
 
 
-  
+
   // Shop address - you can modify this as needed
   const SHOP_ADDRESS = {
     name: "Mofk",
@@ -539,188 +539,192 @@ const OrderTable = ({ orderList, setOrderList }) => {
           </div>
 
           <Card className="w-full shadow-sm rounded-xl bg-white border-[1px] mt-3">
-            <CardBody>
-              <table className="w-full table-auto text-left border-collapse">
-                <thead>
-                  <tr className='bg-quaternary'>
-                    {tableHead.map((head) => (
-                      <th key={head} className="border-b border-blue-gray-100 p-3 text-center w-[300px] whitespace-nowrap">
-                        <Typography
-                          variant="small"
-                          className="font-semibold font-custom text-secondary leading-none text-base uppercase"
-                        >
-                          {head}
-                        </Typography>
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentOrderList.map((order, index) => {
-                    const isLast = index === currentOrderList.length - 1;
-                    const classes = isLast
-                      ? "p-4 text-center"
-                      : "p-4 border-b border-gray-300 text-center";
+            <CardBody className="p-0">
+              <div className="max-h-[70vh] overflow-y-auto overflow-x-auto">
+                <table className="w-full table-auto text-left border-collapse">
 
-                    return (
-                      <tr key={order._id}>
-                        {!editStatusBtn ? (
-                          <></>
-                        ) : (
-                          <>
-                            <td className={classes}>
-                              <Checkbox
-                                checked={selectOrder.includes(order._id)}
-                                onChange={() => handleCheckboxClick(order._id)}
-                              />
-                            </td>
-                          </>
-                        )}
-                        <td className={classes}>
-                          <Typography variant="small" className="font-normal font-custom text-sm">
-                            {order?.orderId}
-                          </Typography>
-                        </td>
-                        <td className={classes}>
-                          <Typography variant="small" className="font-normal font-custom text-sm capitalize">
-                            {order.userId?.name || ""}
-                          </Typography>
-                        </td>
-                        <td className={classes}>
-                          <div className="w-48">
-                            {order?.addressDetails || order?.addressId ? (
-                              <>
-                                {/* Compact view */}
-                                {!expandedAddresses[order._id] && (
-                                  <Typography variant="small" className="font-normal font-custom text-sm line-clamp-1">
-                                    {order.addressDetails?.address || order.addressId?.address},
-                                    {order.addressDetails?.area || ''}
-                                  </Typography>
-                                )}
-
-                                {/* Expanded view */}
-                                {expandedAddresses[order._id] && (
-                                  <div className="text-sm space-y-1">
-                                    <div className="font-medium">
-                                      {order.addressDetails?.firstName || ''} {order.addressDetails?.lastName || ''}
-                                    </div>
-                                    <div>
-                                      {order.addressDetails?.address || order.addressId?.address},
-                                      {order.addressDetails?.area ? ` ${order.addressDetails.area}` : ''}
-                                    </div>
-                                    <div>
-                                      {order.addressDetails?.city || order.addressId?.city},
-                                      {order.addressDetails?.state || order.addressId?.state} -
-                                      {order.addressDetails?.pincode || order.addressId?.pincode}
-                                    </div>
-                                    {order.addressDetails?.landmark && (
-                                      <div className="text-gray-600">Landmark: {order.addressDetails.landmark}</div>
-                                    )}
-                                    <div className="text-gray-600">
-                                      Phone: {order.addressDetails?.number || order.userId?.phone || 'N/A'}
-                                    </div>
-                                  </div>
-                                )}
-
-                                {/* Toggle button */}
-                                <button
-                                  className="text-blue-500 hover:underline text-xs mt-1 focus:outline-none"
-                                  onClick={() => toggleAddress(order._id)}
-                                >
-                                  {expandedAddresses[order._id] ? 'View Less' : 'View More'}
-                                </button>
-                              </>
-                            ) : (
-                              <Typography variant="small" className="font-normal font-custom text-sm">
-                                Address not available
-                              </Typography>
-                            )}
-                          </div>
-                        </td>
-                        <td className={classes}>
-                          <Typography variant="small" className="font-normal font-custom text-sm capitalize">
-                            {order?.orderNote ? order.orderNote : 'Not available'}
-                          </Typography>
-                        </td>
-
-                        <td className={classes}>
-                          <Typography variant="small" className="font-normal font-custom text-sm">
-                            {new Date(order.createdAt).toLocaleDateString('en-US', {
-                              year: 'numeric',
-                              month: 'short',
-                              day: 'numeric',
-                            })}
-                          </Typography>
-                        </td>
-                        <td className={classes}>
-                          <Typography variant="small" className="font-normal font-custom text-sm capitalize">
-                            {order?.paymentMethod}
-                          </Typography>
-                        </td>
-                        <td className={classes}>
-                          <Typography variant="small" className="font-normal font-custom text-sm capitalize">
-                            ₹{Math.ceil(order?.finalPayableAmount)}
-                          </Typography>
-                        </td>
-
-
-                        <td className={classes}>
-                          <Chip
-                            className={`capitalize text-sm text-center font-normal ${statusColors[order.status] || statusColors.default}`}
-                            value={
-                              order?.status === 'In-Transist'
-                                ? 'dispatched'
-                                : order.status === 'invoice_generated'
-                                  ? 'Invoice Generated'
-                                  : order.status === 'Cancelled'
-                                    ? `Cancelled (${order.isRefunded ? 'Refunded' : 'Not Refunded'})`
-                                    : order.status
-                            }
-                          />
-                        </td>
-                        <td className={classes}>
-                          <Button
-                            onClick={() => handleOpenViewOrders(order.products)}
-                            className='bg-transparent shadow-none text-secondary font-custom capitalize font-normal
-                          text-sm border border-gray-700 rounded-3xl px-4 py-2 hover:shadow-none'>View</Button>
-                        </td>
-                        <td className={classes}>
-                          {order?.TrackId ? (
-                            <span
-                              onClick={() => {
-                                handleOpenEditTrackIdModal(order._id);
-                                handleEditTrackId(order.TrackId);
-                              }}
-                              className="text-buttonBg font-medium tracking-wider cursor-pointer hover:underline"
-                            >
-                              {order?.TrackId}
-                            </span>
-                          ) : (
-                            <Button
-                              variant="gradient"
-                              onClick={() => handleOpenTrackId(order._id)}
-                              className="bg-secondary shadow-none text-white font-custom capitalize font-normal 
-                                text-xs border border-gray-700 rounded-3xl px-3 py-2 hover:shadow-none"
-                            >
-                              Set Track ID
-                            </Button>
-                          )}
-                        </td>
-                        <td className={classes}>
-                          <Button
-                            onClick={() => handlePrintOrder(order)}
-                            className='bg-green-500 shadow-none text-white font-custom capitalize font-normal 
-                              text-xs border border-gray-700 rounded-3xl px-3 py-2 hover:shadow-none hover:bg-green-600'
+                  <thead>
+                    <tr className='bg-quaternary'>
+                      {tableHead.map((head) => (
+                        <th key={head} className="border-b border-blue-gray-100 p-3 text-center w-[300px] whitespace-nowrap">
+                          <Typography
+                            variant="small"
+                            className="font-semibold font-custom text-secondary leading-none text-base uppercase"
                           >
-                            Print
-                          </Button>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+                            {head}
+                          </Typography>
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {currentOrderList.map((order, index) => {
+                      const isLast = index === currentOrderList.length - 1;
+                      const classes = isLast
+                        ? "p-4 text-center"
+                        : "p-4 border-b border-gray-300 text-center";
+
+                      return (
+                        <tr key={order._id}>
+                          {!editStatusBtn ? (
+                            <></>
+                          ) : (
+                            <>
+                              <td className={classes}>
+                                <Checkbox
+                                  checked={selectOrder.includes(order._id)}
+                                  onChange={() => handleCheckboxClick(order._id)}
+                                />
+                              </td>
+                            </>
+                          )}
+                          <td className={classes}>
+                            <Typography variant="small" className="font-normal font-custom text-sm">
+                              {order?.orderId}
+                            </Typography>
+                          </td>
+                          <td className={classes}>
+                            <Typography variant="small" className="font-normal font-custom text-sm capitalize">
+                              {order.userId?.name || ""}
+                            </Typography>
+                          </td>
+                          <td className={classes}>
+                            <div className="w-48">
+                              {order?.addressDetails || order?.addressId ? (
+                                <>
+                                  {/* Compact view */}
+                                  {!expandedAddresses[order._id] && (
+                                    <Typography variant="small" className="font-normal font-custom text-sm line-clamp-1">
+                                      {order.addressDetails?.address || order.addressId?.address},
+                                      {order.addressDetails?.area || ''}
+                                    </Typography>
+                                  )}
+
+                                  {/* Expanded view */}
+                                  {expandedAddresses[order._id] && (
+                                    <div className="text-sm space-y-1">
+                                      <div className="font-medium">
+                                        {order.addressDetails?.firstName || ''} {order.addressDetails?.lastName || ''}
+                                      </div>
+                                      <div>
+                                        {order.addressDetails?.address || order.addressId?.address},
+                                        {order.addressDetails?.area ? ` ${order.addressDetails.area}` : ''}
+                                      </div>
+                                      <div>
+                                        {order.addressDetails?.city || order.addressId?.city},
+                                        {order.addressDetails?.state || order.addressId?.state} -
+                                        {order.addressDetails?.pincode || order.addressId?.pincode}
+                                      </div>
+                                      {order.addressDetails?.landmark && (
+                                        <div className="text-gray-600">Landmark: {order.addressDetails.landmark}</div>
+                                      )}
+                                      <div className="text-gray-600">
+                                        Phone: {order.addressDetails?.number || order.userId?.phone || 'N/A'}
+                                      </div>
+                                    </div>
+                                  )}
+
+                                  {/* Toggle button */}
+                                  <button
+                                    className="text-blue-500 hover:underline text-xs mt-1 focus:outline-none"
+                                    onClick={() => toggleAddress(order._id)}
+                                  >
+                                    {expandedAddresses[order._id] ? 'View Less' : 'View More'}
+                                  </button>
+                                </>
+                              ) : (
+                                <Typography variant="small" className="font-normal font-custom text-sm">
+                                  Address not available
+                                </Typography>
+                              )}
+                            </div>
+                          </td>
+                          <td className={classes}>
+                            <Typography variant="small" className="font-normal font-custom text-sm capitalize">
+                              {order?.orderNote ? order.orderNote : 'Not available'}
+                            </Typography>
+                          </td>
+
+                          <td className={classes}>
+                            <Typography variant="small" className="font-normal font-custom text-sm">
+                              {new Date(order.createdAt).toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'short',
+                                day: 'numeric',
+                              })}
+                            </Typography>
+                          </td>
+                          <td className={classes}>
+                            <Typography variant="small" className="font-normal font-custom text-sm capitalize">
+                              {order?.paymentMethod}
+                            </Typography>
+                          </td>
+                          <td className={classes}>
+                            <Typography variant="small" className="font-normal font-custom text-sm capitalize">
+                              ₹{Math.ceil(order?.finalPayableAmount)}
+                            </Typography>
+                          </td>
+
+
+                          <td className={classes}>
+                            <Chip
+                              className={`capitalize text-sm text-center font-normal ${statusColors[order.status] || statusColors.default}`}
+                              value={
+                                order?.status === 'In-Transist'
+                                  ? 'dispatched'
+                                  : order.status === 'invoice_generated'
+                                    ? 'Invoice Generated'
+                                    : order.status === 'Cancelled'
+                                      ? `Cancelled (${order.isRefunded ? 'Refunded' : 'Not Refunded'})`
+                                      : order.status
+                              }
+                            />
+                          </td>
+                          <td className={classes}>
+                            <Button
+                              onClick={() => handleOpenViewOrders(order.products)}
+                              className='bg-transparent shadow-none text-secondary font-custom capitalize font-normal
+                          text-sm border border-gray-700 rounded-3xl px-4 py-2 hover:shadow-none'>View</Button>
+                          </td>
+                          <td className={classes}>
+                            {order?.TrackId ? (
+                              <span
+                                onClick={() => {
+                                  handleOpenEditTrackIdModal(order._id);
+                                  handleEditTrackId(order.TrackId);
+                                }}
+                                className="text-buttonBg font-medium tracking-wider cursor-pointer hover:underline"
+                              >
+                                {order?.TrackId}
+                              </span>
+                            ) : (
+                              <Button
+                                variant="gradient"
+                                onClick={() => handleOpenTrackId(order._id)}
+                                className="bg-secondary shadow-none text-white font-custom capitalize font-normal 
+                                text-xs border border-gray-700 rounded-3xl px-3 py-2 hover:shadow-none"
+                              >
+                                Set Track ID
+                              </Button>
+                            )}
+                          </td>
+                          <td className={classes}>
+                            <Button
+                              onClick={() => handlePrintOrder(order)}
+                              className='bg-green-500 shadow-none text-white font-custom capitalize font-normal 
+                              text-xs border border-gray-700 rounded-3xl px-3 py-2 hover:shadow-none hover:bg-green-600'
+                            >
+                              Print
+                            </Button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
             </CardBody>
+
 
             {!editStatusBtn ? (
               <></>
