@@ -40,7 +40,7 @@ ${formData.message}
 
         
         const encodedMessage = encodeURIComponent(whatsappMessage);
-        const whatsappNumber = '917994237001'; 
+        const whatsappNumber = '919037065007'; 
         
         const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
         
@@ -83,17 +83,17 @@ ${formData.message}
                                 <div className="space-y-8 mb-16">
                                     <div className="flex items-center gap-4">
                                         <Phone className="w-5 h-5" />
-                                        <span>+91 79942 37001</span>
+                                        <span>+91 9037065007</span>
                                     </div>
 
                                     <div className="flex items-center gap-4">
                                         <Mail className="w-5 h-5" />
-                                        <span>mofkonline@gmail.com</span>
+                                        <span>mofkclothing.1n@gmail.com</span>
                                     </div>
 
                                     <div className="flex items-start gap-4">
                                         <MapPin className="w-5 h-5 mt-1 flex-shrink-0" />
-                                        <span>MOFK Store - Adam square, Angamaly - 680308</span>
+                                        <span>MOFK Clothing - Perinthalmanna , Malappuram</span>
                                     </div>
                                 </div>
 

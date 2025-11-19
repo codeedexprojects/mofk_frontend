@@ -24,7 +24,7 @@ const Footer = () => {
           {/* Brand Section */}
           <div>
             <div className='flex items-center gap-3 mb-6'>
-              <div className=' w-16 h-16  flex items-center justify-center overflow-hidden '>
+              <div className=' w-20 h-20  flex items-center justify-center overflow-hidden '>
                 <img
                   src="/logo.png"
                   alt="Logo"
@@ -99,10 +99,10 @@ const Footer = () => {
             <ul className='space-y-3'>
               <li>
                 <a
-                  href="mailto:mofkonline@gmail.com"
+                  href="mailto:mofkclothing.1n@gmail.com"
                   className='text-gray-700 text-sm hover:text-gray-900 transition-colors block'
                 >
-                  mofkonline@gmail.com
+                  mofkclothing.1n@gmail.com
                 </a>
               </li>
               <li>
@@ -110,17 +110,17 @@ const Footer = () => {
                   href="tel:+919567432832"
                   className='text-gray-700 text-sm hover:text-gray-900 transition-colors block'
                 >
-                  +91 9567432832
+                  +91 9037065007
                 </a>
               </li>
               <li>
                 <a
-                  href="https://www.google.com/maps?q=Pooky+village+adam+sark,+andaman"
+                  href="https://maps.app.goo.gl/WK3UFfr5MyovhJYq5"
                   target="_blank"
                   rel="noopener noreferrer"
                   className='text-gray-700 text-sm hover:text-gray-900 transition-colors block'
                 >
-                  Mofk village adam sark, andaman
+                  MOFK Clothing - Perinthalmanna , Malappuram
                 </a>
               </li>
             </ul>
@@ -130,7 +130,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className='mt-12 pt-6 flex flex-col md:flex-row items-center justify-center gap-6 relative z-10'>
           <p className='text-gray-600 text-sm text-center'>
-            ©2024 mo mo . All rights reserved
+            ©2025 MOFK . All rights reserved
           </p>
           
           {/* Social Media Icons */}
