@@ -99,15 +99,18 @@ ${formData.message}
 
                                 {/* Social Media Icons */}
                                 <div className="flex gap-4">
-                                    <button className="w-10 h-10 bg-gray-900 hover:bg-gray-800 rounded-full flex items-center justify-center transition">
-                                        <FaTwitter className="w-5 h-5 text-white" />
-                                    </button>
-                                    <button className="w-10 h-10 bg-gray-900 hover:bg-gray-800 rounded-full flex items-center justify-center transition">
-                                        <FaInstagram className="w-5 h-5 text-white" />
-                                    </button>
-                                    <button className="w-10 h-10 bg-gray-900 hover:bg-gray-800 rounded-full flex items-center justify-center transition">
-                                        <FaLinkedin className="w-5 h-5 text-white" />
-                                    </button>
+                                    
+                                    <a 
+  href="https://www.instagram.com/mofk_in?igsh=ZDFxa29wa2g3YjNn&utm_source=qr" 
+  target="_blank" 
+  rel="noopener noreferrer"
+>
+  <button className="w-10 h-10 bg-gray-900 hover:bg-gray-800 rounded-full flex items-center justify-center transition">
+    <FaInstagram className="w-5 h-5 text-white" />
+  </button>
+</a>
+
+                                    
                                 </div>
 
                             </div>
