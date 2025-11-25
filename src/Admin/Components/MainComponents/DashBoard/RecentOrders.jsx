@@ -11,6 +11,7 @@ import {
 import MonthMenu from './MonthMenu';
 import axios from 'axios';
 import { AppContext } from '../../../../StoreContext/StoreContext';
+import { useNavigate } from 'react-router-dom';
 
 const TABLE_HEAD = ["Product Name", "Location", "Date", "Piece", "Amount", "Status"];
 
@@ -19,6 +20,7 @@ const RecentOrders = () => {
     const { BASE_URL } = useContext(AppContext);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(5);
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchRecentOrders = async () => {
@@ -108,7 +110,12 @@ const RecentOrders = () => {
                                 : "p-4 border-b border-gray-300 text-center";
 
                             return (
-                                <tr key={recentOrder._id}>
+                               <tr
+    key={recentOrder._id}
+    onClick={() => navigate("/adminHome/orderlist", { state: { order: recentOrder } })}
+    className="cursor-pointer hover:bg-gray-100 transition"
+>
+
                                     <td className={classes}>
                                         <div className="flex flex-col items-center gap-2">
                                             <div className="w-[60px] h-[60px] rounded-md">

@@ -103,9 +103,13 @@ const CreateCategories = ({ setAdminCategory }) => {
                     <div>
                         <div className='flex items-center justify-between'>
                             <label htmlFor="" className='font-normal text-base'>Image</label>
-                            <RiDeleteBin5Line onClick={() => setCreateCategoryForm((prev) => ({ ...prev, image: null }))} className='text-deleteBg text-xl hover:text-black cursor-pointer' />
+                            <RiDeleteBin5Line
+                                onClick={() => setCreateCategoryForm((prev) => ({ ...prev, image: null }))}
+                                className='text-deleteBg text-xl hover:text-black cursor-pointer'
+                            />
                         </div>
-                        <div className="w-full h-48 flex justify-center items-center border-2 rounded-xl mt-2">
+
+                        <div className="w-full h-48 flex flex-col justify-center items-center border-2 rounded-xl mt-2">
                             {!createCategoryForm.image ? (
                                 <>
                                     <input
@@ -119,18 +123,22 @@ const CreateCategories = ({ setAdminCategory }) => {
                                         <img src="/imgupload.png" alt="" className="w-16" />
                                         <p className="text-secondary text-xs">Browse files to upload</p>
                                         <p className='text-secondary text-xs'>Max image size 5MB</p>
-                                        <p className='text-secondary text-xs'>We can read: JPG, JPEG</p>
+                                        <p className='text-secondary text-xs'>We can read: JPG, JPEG, WEBP</p>
+                                        <p className='text-secondary text-xs font-medium mt-1'>
+                                            Recommended size: 1000×1000 px
+                                        </p>
                                     </label>
                                 </>
                             ) : (
                                 <img
                                     src={URL.createObjectURL(createCategoryForm.image)}
                                     alt="Uploaded"
-                                    className="w-full h-full rounded-lg"
+                                    className="w-full h-full rounded-lg object-cover"
                                 />
                             )}
                         </div>
                     </div>
+
 
                     {/* Description */}
                     <div className="flex flex-col gap-1">

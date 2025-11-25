@@ -131,15 +131,15 @@ const EditCategories = ({ initialData, setAdminCategory }) => {
                                             accept="image/*"
                                             onChange={handleImageUpload}
                                         />
-                                        <label
-                                            htmlFor="file"
-                                            className="flex flex-col items-center cursor-pointer"
-                                        >
-                                            <img src="/imgupload.png" alt="" className='w-16' />
-                                            <p className="text-secondary text-xs">Browse files to upload</p>
-                                            <p className='text-secondary text-xs'>Max image size 5MB</p>
-                                            <p className='text-secondary text-xs'>We can read: JPG, JPEG</p>
-                                        </label>
+                                       <label htmlFor="file" className="flex flex-col items-center cursor-pointer">
+                                        <img src="/imgupload.png" alt="" className="w-16" />
+                                        <p className="text-secondary text-xs">Browse files to upload</p>
+                                        <p className='text-secondary text-xs'>Max image size 5MB</p>
+                                        <p className='text-secondary text-xs'>We can read: JPG, JPEG, WEBP</p>
+                                        <p className='text-secondary text-xs font-medium mt-1'>
+                                            Recommended size: 1000×1000 px
+                                        </p>
+                                    </label>
                                     </>
                                 )}
                             </div>

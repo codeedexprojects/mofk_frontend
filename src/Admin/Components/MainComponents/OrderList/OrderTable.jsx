@@ -11,7 +11,6 @@ import EditTrackIdModal from './EditTrackIdModal'
 import * as XLSX from 'xlsx';
 import namer from 'color-namer';
 
-
 const TABLE_HEAD = ["ID", "Customer", "Address", "Order Note", "Order Date", "Payment", "Total Price", "Status", "Orders", "Track ID", "Actions"];
 
 const OrderTable = ({ orderList, setOrderList }) => {
@@ -37,17 +36,15 @@ const OrderTable = ({ orderList, setOrderList }) => {
     }));
   };
 
-
-
   // Shop address - you can modify this as needed
   const SHOP_ADDRESS = {
     name: "Mofk",
-    address: "Mofk Store - Adam square, Angamaly",
-    city: "Ernakulam",
+    address: "Mofk Store",
+    city: "Perinthalmanna, Malappuram",
     state: "Kerala",
-    pincode: "680308",
-    phone: "+91 79942 37001",
-    email: "mofkonline@gmail.com"
+    pincode: "679321",
+    phone: "+91 9037065007",
+    email: "mofkclothing.1n@gmail.com"
   };
 
   const handleEditTrackId = (trackId) => {
@@ -491,6 +488,201 @@ const OrderTable = ({ orderList, setOrderList }) => {
     toast.success("Order list downloaded successfully");
   };
 
+  // Print multiple orders (each in separate page)
+  const handlePrintSelectedOrders = () => {
+    if (selectOrder.length === 0) {
+      toast.error("Please select at least one order to print");
+      return;
+    }
+
+    const selectedOrders = orderList.filter(order =>
+      selectOrder.includes(order._id)
+    );
+
+    const printWindow = window.open("", "_blank");
+    printWindow.document.open();
+
+    let combinedHTML = `
+    <html>
+      <head>
+        <title>Print Orders</title>
+        <style>
+  body { font-family: Arial; padding: 20px; }
+  .page-break { page-break-after: always; }
+
+  .invoice-container { max-width: 850px; margin: auto; }
+  .header { text-align:center; margin-bottom:20px; border-bottom:1px solid #000; padding-bottom:10px; }
+  .company-name { font-size:26px; font-weight:bold; }
+
+  .addresses { display:flex; justify-content:space-between; margin:20px 0; }
+  .address-block { width:45%; }
+  .address-title { font-weight:bold; margin-bottom:5px; color:#2c5aa0; }
+  .address-content { font-size:13px; line-height:1.5; }
+
+  .order-info { background:#f8f8f8; padding:10px; border-radius:5px; margin:20px 0; }
+  .order-info-row { display:flex; justify-content:space-between; margin-bottom:5px; }
+
+  .order-table { width:100%; border-collapse:collapse; margin-top:20px; }
+  .order-table th, .order-table td { border:1px solid #ccc; padding:10px; }
+  .order-table th { background:#2c5aa0; color:white; }
+
+  .product-image { width:60px; height:60px; object-fit:cover; border-radius:4px; }
+  .color-indicator { width:18px; height:18px; border-radius:50%; border:1px solid #111; margin-right:6px; }
+
+  .total-section { text-align:right; margin-top:20px; border-top:2px solid #000; padding-top:10px; }
+  .total-amount { font-size:18px; font-weight:bold; color:#2c5aa0; }
+
+  .footer { text-align:center; margin-top:30px; font-size:12px; color:#555; }
+</style>
+
+      </head>
+      <body>
+  `;
+
+    selectedOrders.forEach((order, index) => {
+      combinedHTML += `
+      <div class="invoice-page">
+        ${generateOrderHTML(order)}
+      </div>
+      ${index !== selectedOrders.length - 1 ? '<div class="page-break"></div>' : ''}
+    `;
+    });
+
+    combinedHTML += `
+      </body>
+    </html>
+  `;
+
+    printWindow.document.write(combinedHTML);
+    printWindow.document.close();
+    printWindow.focus();
+    printWindow.print();
+  };
+
+  const generateOrderHTML = (order) => {
+    const getNamedColor = (colorCode) => {
+      try {
+        const namedColors = namer(colorCode);
+        return namedColors.ntc[0]?.name || "Unknown Color";
+      } catch {
+        return "Invalid Color";
+      }
+    };
+
+    return `
+    <div class="invoice-container">
+
+      <div class="header">
+        <div class="company-name">${SHOP_ADDRESS.name}</div>
+      </div>
+
+      <div class="addresses">
+        <div class="address-block">
+          <div class="address-title">From:</div>
+          <div class="address-content">
+            <strong>${SHOP_ADDRESS.name}</strong><br>
+            ${SHOP_ADDRESS.address}<br>
+            ${SHOP_ADDRESS.city}, ${SHOP_ADDRESS.state} - ${SHOP_ADDRESS.pincode}<br>
+            Phone: ${SHOP_ADDRESS.phone}<br>
+            Email: ${SHOP_ADDRESS.email}
+          </div>
+        </div>
+
+        <div class="address-block">
+          <div class="address-title">To:</div>
+          <div class="address-content">
+            <strong>${order.addressDetails?.firstName || 'N/A'} ${order.addressDetails?.lastName || ''}</strong><br>
+            ${order.addressDetails?.address || 'N/A'}<br>
+            ${order.addressDetails?.area ? `${order.addressDetails.area}, ` : ''}
+            ${order.addressDetails?.city || ''} ${order.addressDetails?.state || ''}<br>
+            ${order.addressDetails?.pincode || ''}<br>
+            ${order.addressDetails?.landmark ? `Landmark: ${order.addressDetails.landmark}<br>` : ''}
+            Phone: ${order.addressDetails?.number || order.userId?.phone || 'N/A'}
+          </div>
+        </div>
+      </div>
+
+      <div class="order-info">
+        <div class="order-info-row">
+          <span><strong>Order ID:</strong></span><span>${order.orderId}</span>
+        </div>
+        <div class="order-info-row">
+          <span><strong>Order Date:</strong></span><span>${new Date(order.createdAt).toLocaleDateString()}</span>
+        </div>
+        <div class="order-info-row">
+          <span><strong>Payment Method:</strong></span><span>${order.paymentMethod}</span>
+        </div>
+        <div class="order-info-row">
+          <span><strong>Order Status:</strong></span><span>${order.status}</span>
+        </div>
+        ${order.TrackId ? `
+          <div class="order-info-row">
+            <span><strong>Tracking ID:</strong></span><span>${order.TrackId}</span>
+          </div>
+        ` : ""}
+      </div>
+
+      <table class="order-table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Color & Size</th>
+            <th>Qty</th>
+            <th>Unit</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${order.products.map(p => {
+      const unitPrice = p.price || p.productId?.price || 0;
+      const quantity = p.quantity || 1;
+      const total = unitPrice * quantity;
+
+      return `
+              <tr>
+                <td>
+                  <img src="${p.productId?.images?.[0] || '/no-image.jpg'}"
+                       class="product-image"
+                       onerror="this.src='/no-image.jpg'"/>
+                </td>
+                <td>
+                  <strong>${p.productId?.title || 'Product'}</strong><br>
+                  Code: ${p.productId?.product_Code || 'N/A'}
+                </td>
+                <td>
+                  ${p.color ? `
+                    <div style="display:flex; align-items:center; margin-bottom:4px;">
+                      <span class="color-indicator" style="background:${p.color}"></span>
+                      <span>${getNamedColor(p.color)}</span>
+                    </div>
+                  ` : "No Color"}
+                  ${p.size ? `Size: ${p.size}` : ""}
+                </td>
+                <td style="text-align:center;">${quantity}</td>
+                <td>₹${Math.ceil(unitPrice)}</td>
+                <td><strong>₹${Math.ceil(total)}</strong></td>
+              </tr>
+            `;
+    }).join("")}
+        </tbody>
+      </table>
+
+      <div class="total-section">
+        <div class="total-amount">
+          Total Amount: ₹${Math.ceil(order.finalPayableAmount)}
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>Thank you for shopping with ${SHOP_ADDRESS.name}!</p>
+        <p>For queries contact ${SHOP_ADDRESS.phone} / ${SHOP_ADDRESS.email}</p>
+      </div>
+    </div>
+  `;
+  };
+
+
 
   return (
     <>
@@ -506,8 +698,7 @@ const OrderTable = ({ orderList, setOrderList }) => {
         <>
           <div className='relative'>
             {!editStatusBtn ? (
-              <>
-              </>
+              <></>
             ) : (
               <div className='flex items-center absolute left-0'>
                 <Checkbox
@@ -517,26 +708,43 @@ const OrderTable = ({ orderList, setOrderList }) => {
                 Select All
               </div>
             )}
+
             <div className='flex items-center gap-5 justify-end'>
-              <a href=""
+              <a
                 onClick={downloadOrderList}
                 className='underline underline-offset-2 text-sm text-shippedBg cursor-pointer'
-              >Download as an Excel file</a>
+              >
+                Download as an Excel file
+              </a>
+
+              {/* 👉 ADD PRINT BUTTON HERE */}
+              {editStatusBtn && (
+                <Button
+                  onClick={handlePrintSelectedOrders}
+                  className="bg-green-600 text-white font-custom capitalize text-sm px-4 py-2"
+                >
+                  Print Selected
+                </Button>
+              )}
+
               {!editStatusBtn ? (
-                <>
-                  <Button
-                    onClick={() => setEditStatusBtn(!editStatusBtn)}
-                    className='bg-buttonBg capitalize text-sm font-normal font-custom'>Edit Status</Button>
-                </>
+                <Button
+                  onClick={() => setEditStatusBtn(!editStatusBtn)}
+                  className='bg-buttonBg capitalize text-sm font-normal font-custom'
+                >
+                  Edit Status
+                </Button>
               ) : (
-                <>
-                  <p
-                    onClick={() => setEditStatusBtn(!editStatusBtn)}
-                    className='text-secondary underline underline-offset-2 text-lg cursor-pointer font-normal font-custom'>Back</p>
-                </>
+                <p
+                  onClick={() => setEditStatusBtn(!editStatusBtn)}
+                  className='text-secondary underline underline-offset-2 text-lg cursor-pointer font-normal font-custom'
+                >
+                  Back
+                </p>
               )}
             </div>
           </div>
+
 
           <Card className="w-full shadow-sm rounded-xl bg-white border-[1px] mt-3">
             <CardBody className="p-0">

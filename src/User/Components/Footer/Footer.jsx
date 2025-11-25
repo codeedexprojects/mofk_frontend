@@ -135,32 +135,32 @@ const Footer = () => {
           
           {/* Social Media Icons */}
           <div className='flex items-center gap-4'>
-            <a
+            {/* <a
               href="https://facebook.com"
               target="_blank"
               rel="noopener noreferrer"
               className='w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center hover:bg-blue-700 transition-colors'
             >
               <FaFacebook className='text-white text-sm' />
-            </a>
+            </a> */}
             <a
-              href="https://linkedin.com"
+              href="https://www.instagram.com/mofk_in?igsh=ZDFxa29wa2g3YjNn&utm_source=qr"
               target="_blank"
               rel="noopener noreferrer"
               className='w-8 h-8 rounded-full bg-blue-700 flex items-center justify-center hover:bg-blue-800 transition-colors'
             >
-              <FaLinkedin className='text-white text-sm' />
+              <FaInstagram className='text-white text-sm' />
             </a>
-            <a
+            {/* <a
               href="https://youtube.com"
               target="_blank"
               rel="noopener noreferrer"
               className='w-8 h-8 rounded-full bg-red-600 flex items-center justify-center hover:bg-red-700 transition-colors'
             >
               <FaYoutube className='text-white text-sm' />
-            </a>
+            </a> */}
             <a
-              href="https://wa.me/"
+              href="https://wa.me/+919037065007"
               target="_blank"
               rel="noopener noreferrer"
               className='w-8 h-8 rounded-full bg-green-500 flex items-center justify-center hover:bg-green-600 transition-colors'

@@ -126,7 +126,8 @@ const UsersListTable = ({ userList, setUserList }) => {
 
                     <Card className="w-full shadow-sm rounded-xl bg-white border-[1px]">
                         <CardBody>
-                            <table className="w-full table-auto text-left border-collapse">
+                           <div className="w-full overflow-x-auto">
+                                    <table className="min-w-max table-auto text-left">
                                 <thead className="bg-quaternary">
                                     <tr>
                                         {/* Add S/N header */}
@@ -232,6 +233,7 @@ const UsersListTable = ({ userList, setUserList }) => {
                                     })}
                                 </tbody>
                             </table>
+                            </div>
                         </CardBody>
                         <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
                             <Button

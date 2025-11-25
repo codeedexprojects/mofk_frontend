@@ -53,8 +53,9 @@ export function AppSidebar() {
             <List className='mt-8 px-4 space-y-1'>
                 {[
                     { to: "/adminHome", label: "Dashboard", icon: IoMdTimer, key: "dashboard" },
-                    
                     { to: "/adminHome/product", label: "Products", icon: MdOutlineWindow, key: "product" },
+                    { to: "/adminHome/orderlist", label: "Order List", icon: TbListCheck, key: "orderlist" },
+                    { to: "/adminHome/invoice", label: "Invoice", icon: TbFileInvoice, key: "invoice" },
                     { to: "/adminHome/category", label: "Category", icon: MdOutlineCategory, key: "category" },
                     { to: "/adminHome/subcategory", label: "Sub Category", icon: CgListTree, key: "subcategory" },
                     { to: "/adminHome/admincarousel", label: "Carousel", icon: MdOutlineViewCarousel, key: "admincarousel" },
@@ -64,8 +65,7 @@ export function AppSidebar() {
                     { to: "/adminHome/delivery", label: "Delivery", icon: TbTruckDelivery, key: "delivery" },
                     { to: "/adminHome/coupon", label: "Coupons", icon: RiCouponLine, key: "coupon" },
                     { to: "/adminHome/userslist", label: "Users List", icon: PiUsersBold, key: "userslist" },
-                    { to: "/adminHome/orderlist", label: "Order List", icon: TbListCheck, key: "orderlist" },
-                    { to: "/adminHome/invoice", label: "Invoice", icon: TbFileInvoice, key: "invoice" }
+                    
                 ].map(({ to, label, icon: Icon, key }) => (
                     <Link to={to} key={key}>
                         <ListItem onClick={() => setActiveLink(key)} className={`text-secondary bg-gray-100 p-3 text-base font-medium transition-all duration-300 ease-in-out

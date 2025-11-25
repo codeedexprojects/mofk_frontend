@@ -112,142 +112,145 @@ const InvoiceTable = ({ invoice, setInvoice }) => {
                     <>
                         <Card className="w-full shadow-sm rounded-xl bg-white border-[1px]">
                             <CardBody className=''>
-                                <table className="w-full table-auto text-left">
-                                    <thead>
-                                        <tr className='bg-quaternary'>
-                                            {TABLE_HEAD.map((head) => (
-                                                <th
-                                                    key={head}
-                                                    className="border-b border-blue-gray-100 p-3 text-center"
-                                                >
-                                                    <Typography
-                                                        variant="small"
-                                                        className="font-semibold font-custom text-secondary leading-none text-base uppercase w-[160px]"
+                                <div className="w-full overflow-x-auto">
+                                    <table className="min-w-max table-auto text-left">
+
+                                        <thead>
+                                            <tr className='bg-quaternary'>
+                                                {TABLE_HEAD.map((head) => (
+                                                    <th
+                                                        key={head}
+                                                        className="border-b border-blue-gray-100 p-3 text-center"
                                                     >
-                                                        {head}
-                                                    </Typography>
-                                                </th>
-                                            ))}
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {Array.isArray(currentInvoice) && currentInvoice.map((invoice, index) => {
-                                            const isLast = index === currentInvoice.length - 1;
-                                            const classes = `${isLast ? "p-4" : "p-4 border-b border-gray-300"} text-center w-[150px] truncate`;
+                                                        <Typography
+                                                            variant="small"
+                                                            className="font-semibold font-custom text-secondary leading-none text-base uppercase w-[160px]"
+                                                        >
+                                                            {head}
+                                                        </Typography>
+                                                    </th>
+                                                ))}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {Array.isArray(currentInvoice) && currentInvoice.map((invoice, index) => {
+                                                const isLast = index === currentInvoice.length - 1;
+                                                const classes = `${isLast ? "p-4" : "p-4 border-b border-gray-300"} text-center w-[150px] truncate`;
 
-                                            return (
-                                                <tr key={invoice._id}>
-                                                    <td className={classes}>
-                                                        <Typography
-                                                            variant="small"
-                                                            className="font-normal font-custom text-sm uppercase"
-                                                        >
-                                                            {invoice.invoice_Number}
-                                                        </Typography>
-                                                    </td>
-                                                    <td className={classes}>
-                                                        <Typography
-                                                            variant="small"
-                                                            className="font-normal capitalize font-custom text-sm"
-                                                        >
-                                                            {invoice.customerName}
-                                                        </Typography>
-                                                    </td>
-                                                    <td className={classes}>
-                                                        <Typography
-                                                            variant="small"
-                                                            className="font-normal capitalize font-custom text-sm"
-                                                        >
-                                                            {invoice.customerMobile}
-                                                        </Typography>
-                                                    </td>
-                                                    <td className={classes}>
-                                                        <Typography
-                                                            variant="small"
-                                                            className="font-normal font-custom text-sm"
-                                                        >
-                                                            {new Date(invoice.createdAt).toLocaleDateString('en-US', {
-                                                                year: 'numeric',
-                                                                month: 'short',
-                                                                day: 'numeric',
-                                                            })}
-                                                        </Typography>
-                                                    </td>
-                                                    <td className={classes}>
-                                                        <Typography
-                                                            variant="small"
-                                                            className="font-normal capitalize font-custom text-sm"
-                                                        >
-                                                            ₹{invoice.SubTotalAmount || 0}
-                                                        </Typography>
-                                                    </td>
+                                                return (
+                                                    <tr key={invoice._id}>
+                                                        <td className={classes}>
+                                                            <Typography
+                                                                variant="small"
+                                                                className="font-normal font-custom text-sm uppercase"
+                                                            >
+                                                                {invoice.invoice_Number}
+                                                            </Typography>
+                                                        </td>
+                                                        <td className={classes}>
+                                                            <Typography
+                                                                variant="small"
+                                                                className="font-normal capitalize font-custom text-sm"
+                                                            >
+                                                                {invoice.customerName}
+                                                            </Typography>
+                                                        </td>
+                                                        <td className={classes}>
+                                                            <Typography
+                                                                variant="small"
+                                                                className="font-normal capitalize font-custom text-sm"
+                                                            >
+                                                                {invoice.customerMobile}
+                                                            </Typography>
+                                                        </td>
+                                                        <td className={classes}>
+                                                            <Typography
+                                                                variant="small"
+                                                                className="font-normal font-custom text-sm"
+                                                            >
+                                                                {new Date(invoice.createdAt).toLocaleDateString('en-US', {
+                                                                    year: 'numeric',
+                                                                    month: 'short',
+                                                                    day: 'numeric',
+                                                                })}
+                                                            </Typography>
+                                                        </td>
+                                                        <td className={classes}>
+                                                            <Typography
+                                                                variant="small"
+                                                                className="font-normal capitalize font-custom text-sm"
+                                                            >
+                                                                ₹{invoice.SubTotalAmount || 0}
+                                                            </Typography>
+                                                        </td>
 
-                                                    <td className={classes}>
-                                                        <Typography
-                                                            variant="small"
-                                                            className="font-normal capitalize font-custom text-sm"
-                                                        >
-                                                            ₹{invoice.Delivery_Charge || 0}
-                                                        </Typography>
-                                                    </td>
+                                                        <td className={classes}>
+                                                            <Typography
+                                                                variant="small"
+                                                                className="font-normal capitalize font-custom text-sm"
+                                                            >
+                                                                ₹{invoice.Delivery_Charge || 0}
+                                                            </Typography>
+                                                        </td>
 
-                                                    <td className={classes}>
-                                                        <Typography
-                                                            variant="small"
-                                                            className="font-normal capitalize font-custom text-sm"
-                                                        >
-                                                            ₹{(invoice.SubTotalAmount || 0) - (invoice.Discounted_Amount || 0)}
-                                                        </Typography>
-                                                    </td>
+                                                        <td className={classes}>
+                                                            <Typography
+                                                                variant="small"
+                                                                className="font-normal capitalize font-custom text-sm"
+                                                            >
+                                                                ₹{(invoice.SubTotalAmount || 0) - (invoice.Discounted_Amount || 0)}
+                                                            </Typography>
+                                                        </td>
 
 
-                                                    <td className={classes}>
-                                                        <Typography
-                                                            variant="small"
-                                                            className="font-normal capitalize font-custom text-sm"
-                                                        >
-                                                            ₹{invoice.totalAmount || 0}
-                                                        </Typography>
-                                                    </td>
+                                                        <td className={classes}>
+                                                            <Typography
+                                                                variant="small"
+                                                                className="font-normal capitalize font-custom text-sm"
+                                                            >
+                                                                ₹{invoice.totalAmount || 0}
+                                                            </Typography>
+                                                        </td>
 
-                                                    <td className={classes}>
-                                                        <Typography
-                                                            variant="small"
-                                                            className="font-normal font-custom text-sm"
-                                                        >
-                                                            ₹{invoice.totalAmount || 0}
-                                                        </Typography>
-                                                    </td>
-                                                    <td className={classes}>
-                                                        <Chip
-                                                            className={`capitalize text-sm text-center font-normal ${statusColors[invoice.status] || statusColors.default}`}
-                                                            value={invoice.status}
-                                                        />
-                                                    </td>
-                                                    <td className={classes}>
-                                                        <Menu>
-                                                            <MenuHandler>
-                                                                <Button className="text-buttonBg bg-editBg font-custom font-normal text-sm capitalize px-4 py-1 shadow-none
+                                                        <td className={classes}>
+                                                            <Typography
+                                                                variant="small"
+                                                                className="font-normal font-custom text-sm"
+                                                            >
+                                                                ₹{invoice.totalAmount || 0}
+                                                            </Typography>
+                                                        </td>
+                                                        <td className={classes}>
+                                                            <Chip
+                                                                className={`capitalize text-sm text-center font-normal ${statusColors[invoice.status] || statusColors.default}`}
+                                                                value={invoice.status}
+                                                            />
+                                                        </td>
+                                                        <td className={classes}>
+                                                            <Menu>
+                                                                <MenuHandler>
+                                                                    <Button className="text-buttonBg bg-editBg font-custom font-normal text-sm capitalize px-4 py-1 shadow-none
                                                                 hover:shadow-none hover:bg-buttonBg hover:text-editBg">
-                                                                    Edit</Button>
-                                                            </MenuHandler>
-                                                            <MenuList>
-                                                                {allowedStatuses.map((status, index) => (
-                                                                    <MenuItem
-                                                                        key={index}
-                                                                        onClick={() => handleStatusChange(invoice._id, status)}
-                                                                        className={`font-custom capitalize ${statusColors[status]?.split(" ")[0]} hover:!text-buttonBg`}
-                                                                    >
-                                                                        {status}</MenuItem>
-                                                                ))}
-                                                            </MenuList>
-                                                        </Menu>
-                                                    </td>
-                                                </tr>
-                                            );
-                                        })}
-                                    </tbody>
-                                </table>
+                                                                        Edit</Button>
+                                                                </MenuHandler>
+                                                                <MenuList>
+                                                                    {allowedStatuses.map((status, index) => (
+                                                                        <MenuItem
+                                                                            key={index}
+                                                                            onClick={() => handleStatusChange(invoice._id, status)}
+                                                                            className={`font-custom capitalize ${statusColors[status]?.split(" ")[0]} hover:!text-buttonBg`}
+                                                                        >
+                                                                            {status}</MenuItem>
+                                                                    ))}
+                                                                </MenuList>
+                                                            </Menu>
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            })}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </CardBody>
                             <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
                                 <Button
