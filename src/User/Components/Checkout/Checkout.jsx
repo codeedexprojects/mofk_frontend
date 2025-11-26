@@ -111,8 +111,8 @@ const Checkout = () => {
     // handle razorpay
     const handleRazorpayPayment = (orderResponse) => {
         const options = {
-            // key: "rzp_live_Rdz87MFDRQMtZP",
-            key: "rzp_test_RRI9aZz0HTXgZE",
+            key: "rzp_live_Rdz87MFDRQMtZP",
+            // key: "rzp_test_RRI9aZz0HTXgZE", test
             amount: orderResponse.amount,
             currency: orderResponse.currency,
             name: "MOFK",
