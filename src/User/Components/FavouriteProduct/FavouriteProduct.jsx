@@ -104,7 +104,8 @@ const FavouriteProduct = () => {
                                         className="text-deleteBg absolute -top-5 right-1 cursor-pointer"
                                     />
                                     <Link
-                                        to={`/product-details/${product?.productId?._id}${product?.productId?.category?._id ? `/${product.productId.category._id}` : ""}`}
+                                        to={`/product-details/${product?.productId?._id}/${product?.productId?.category?.[0]?._id}`}
+
                                         state={{
                                             productId: product?.productId?._id,
                                             categoryId: product?.productId?.category?._id

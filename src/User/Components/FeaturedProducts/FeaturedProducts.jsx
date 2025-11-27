@@ -93,8 +93,11 @@ const FeaturedProducts = () => {
             setFilteredProducts(featuredProducts);
         } else {
             const filtered = featuredProducts.filter(product =>
-                product.category && product.category.name === categoryName
+                product.category &&
+                product.category.length > 0 &&
+                product.category[0].name === categoryName
             );
+
             setFilteredProducts(filtered);
         }
         setShowAllFeature(false); // Reset view all when filter changes
@@ -209,13 +212,14 @@ const FeaturedProducts = () => {
                             return (
                                 <div className='group relative' key={product._id}>
                                     <Link
-                                        to={`/product-details/${product._id}/${product.category._id}`}
+                                        to={`/product-details/${product?._id}/${product?.category?.[0]?._id}`}
                                         state={{
-                                            productId: product._id,
-                                            categoryId: product.category._id
+                                            productId: product?._id,
+                                            categoryId: product?.category?.[0]?._id
                                         }}
                                         className="cursor-pointer"
                                     >
+
                                         <div className='w-full aspect-[2/3] rounded-xl overflow-hidden'>
                                             <img
                                                 src={product.images[0]}
@@ -258,10 +262,10 @@ const FeaturedProducts = () => {
                                                     <svg
                                                         key={star}
                                                         className={`w-3 h-3 xl:w-4 xl:h-4 lg:w-4 lg:h-4 ${star <= Math.floor(product.averageRating || 0)
+                                                            ? 'text-yellow-400 fill-current'
+                                                            : product.averageRating && star === Math.ceil(product.averageRating) && product.averageRating % 1 !== 0
                                                                 ? 'text-yellow-400 fill-current'
-                                                                : product.averageRating && star === Math.ceil(product.averageRating) && product.averageRating % 1 !== 0
-                                                                    ? 'text-yellow-400 fill-current'
-                                                                    : 'text-gray-300'
+                                                                : 'text-gray-300'
                                                             }`}
                                                         viewBox="0 0 20 20"
                                                     >

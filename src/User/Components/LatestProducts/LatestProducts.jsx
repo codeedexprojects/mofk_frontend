@@ -147,12 +147,13 @@ const LatestProducts = () => {
                 {/* Product Image */}
                 <div className="relative overflow-hidden rounded-lg">
                   <Link
-                    to={`/product-details/${product._id}/${product.category._id}`}
-                    state={{
-                      productId: product._id,
-                      categoryId: product.category._id
-                    }}
-                  >
+                                                          to={`/product-details/${product?._id}/${product?.category?.[0]?._id}`}
+                                                          state={{
+                                                              productId: product?._id,
+                                                              categoryId: product?.category?.[0]?._id
+                                                          }}
+                                                          className="cursor-pointer"
+                                                      >
                     <img
                       src={product.images[0]}
                       alt={product.title}
