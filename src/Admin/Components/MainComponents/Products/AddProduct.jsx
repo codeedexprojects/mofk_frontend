@@ -1312,17 +1312,7 @@ const AddProduct = () => {
                               className='border w-full bg-gray-100/50 p-2 rounded-md uppercase placeholder:text-sm focus:outline-none placeholder:capitalize'
                               required>
                               <option value=''>Select Size</option>
-                              <optgroup label='Sizes'>
-                                <option value='XS (34)'>XS (34)</option>
-                                <option value='S (36)'>S (36)</option>
-                                <option value='M (38)'>M (38)</option>
-                                <option value='L (40)'>L (40)</option>
-                                <option value='XL (42)'>XL (42)</option>
-                                <option value='2XL (44)'>2XL (44)</option>
-                                <option value='3XL (46)'>3XL (46)</option>
-                                <option value='4XL (48)'>4XL (48)</option>
-                                <option value='5XL (50)'>5XL (50)</option>
-                              </optgroup>
+                             
                               <optgroup label='Sizes'>
                                 <option value='S'>S</option>
                                 <option value='M'>M</option>
@@ -1330,6 +1320,8 @@ const AddProduct = () => {
                                 <option value='XL'>XL</option>
                                 <option value='2XL'>2XL</option>
                                 <option value='3XL'>3XL</option>
+                                <option value='4XL'>4XL</option>
+                                <option value='5XL'>5XL</option>
                               </optgroup>
                               <option value='Free'>Free</option>
                             </select>

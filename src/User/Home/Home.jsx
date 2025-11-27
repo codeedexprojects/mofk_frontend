@@ -22,8 +22,8 @@ const UserHome = () => {
                 <LatestProducts />
                 <DreamComfortBanner></DreamComfortBanner>
                 
-                {/* <OfferProducts /> */}
-                {/* <FeaturedProducts /> */}
+                <OfferProducts />
+                <FeaturedProducts />
                
             </div>
             <AboutUs></AboutUs>
