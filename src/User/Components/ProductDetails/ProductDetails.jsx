@@ -452,36 +452,41 @@ const ProductDetails = () => {
                                     </span>
                                 )}
                             </div>
-
                             <div>
-
-                                <div className="flex items-center justify-between xl:justify-normal lg:justify-normal xl:gap-10 lg:gap-10 mt-2">
-                                    <p className="text-base xl:text-lg lg:text-lg font-bold text-gray-700">
-                                        Product Code : {productDetails.product_Code}
-                                    </p>
-                                </div>
-
-
                                 <div className='mt-2'>
                                     <ul className='flex items-center gap-3 xl:gap-4 lg:gap-4'>
-                                        <li className='text-deleteBg font-medium text-2xl xl:text-base lg:text-base'>- {(productDetails.discount % 1 >= 0.9
-                                            ? Math.ceil(productDetails.discount)
-                                            : Math.floor(productDetails.discount)
-                                        )}%
-                                        </li>
-                                        <li className='font-bold text-3xl xl:text-2xl lg:text-2xl'>₹{productDetails.offerPrice % 1 >= 0.9
-                                            ? Math.ceil(productDetails.offerPrice)
-                                            : Math.floor(productDetails.offerPrice)}
-
+                                        {/* Show discount ONLY IF > 0 */}
+                                        {productDetails.discount > 0 && (
+                                            <li className='text-deleteBg font-medium text-2xl xl:text-base lg:text-base'>
+                                                - {(productDetails.discount % 1 >= 0.9
+                                                    ? Math.ceil(productDetails.discount)
+                                                    : Math.floor(productDetails.discount)
+                                                )}%
+                                            </li>
+                                        )}
+                                        {/* Offer Price */}
+                                        <li className='font-bold text-3xl xl:text-2xl lg:text-2xl'>
+                                            ₹{productDetails.offerPrice % 1 >= 0.9
+                                                ? Math.ceil(productDetails.offerPrice)
+                                                : Math.floor(productDetails.offerPrice)
+                                            }
                                         </li>
                                     </ul>
-                                    <p className="text-gray-600 font-normal text-sm xl:text-base lg:text-base">
-                                        M.R.P : <s>{productDetails.actualPrice % 1 >= 0.9
-                                            ? Math.ceil(productDetails.actualPrice)
-                                            : Math.floor(productDetails.actualPrice)}
-                                        </s>
-                                    </p>
+
+                                    {/* Show cut price ONLY IF discount > 0 */}
+                                    {productDetails.discount > 0 && (
+                                        <p className="text-gray-600 font-normal text-sm xl:text-base lg:text-base">
+                                            M.R.P :
+                                            <s>
+                                                {productDetails.actualPrice % 1 >= 0.9
+                                                    ? Math.ceil(productDetails.actualPrice)
+                                                    : Math.floor(productDetails.actualPrice)
+                                                }
+                                            </s>
+                                        </p>
+                                    )}
                                 </div>
+
                                 {productDetails?.freeDelivery && (
                                     <div className='flex items-center justify-between xl:justify-normal lg:justify-normal xl:gap-10 lg:gap-10 mt-2'>
                                         <p className='text-xs xl:text-sm lg:text-sm font-semibold text-shippedBg'>
@@ -609,28 +614,13 @@ const ProductDetails = () => {
                                             ))
                                     }
 
-                                    {showMore && (
-                                        <>
-                                            <div className="grid grid-cols-2 gap-x-4 mb-3">
-                                                <span className="font-normal capitalize text-xs xl:text-sm lg:text-sm text-gray-600">Manufacturer Name</span>
-                                                <span className="text-left capitalize text-xs xl:text-sm lg:text-sm">{productDetails.manufacturerName}</span>
-                                            </div>
-                                            <div className="grid grid-cols-2 gap-x-4 mb-3">
-                                                <span className="font-normal capitalize text-xs xl:text-sm lg:text-sm text-gray-600">Manufacturer Brand</span>
-                                                <span className="text-left capitalize text-xs xl:text-sm lg:text-sm">{productDetails.manufacturerBrand}</span>
-                                            </div>
-                                            <div className="grid grid-cols-2 gap-x-4 mb-3">
-                                                <span className="font-normal capitalize text-xs xl:text-sm lg:text-sm text-gray-600">Manufacturer Address</span>
-                                                <span className="text-left capitalize text-xs xl:text-sm lg:text-sm">{productDetails.manufacturerAddress}</span>
-                                            </div>
-                                        </>
-                                    )}
-                                    <p
+                                    
+                                    {/* <p
                                         className={`text-xs ${showMore ? 'text-buttonBg' : 'text-black'} text-left font-semibold underline underline-offset-2 cursor-pointer mt-5`}
                                         onClick={toggleShowMore}
                                     >
                                         {showMore ? 'See less' : 'See more'}
-                                    </p>
+                                    </p> */}
                                 </div>
 
 

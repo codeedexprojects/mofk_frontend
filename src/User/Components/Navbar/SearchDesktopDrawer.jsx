@@ -121,7 +121,7 @@ export function SearchDesktopDrawer({ open, closeSearchDrawer }) {
                                 return (
                                     <div className='group relative' key={product._id}>
                                         <Link
-                                             to={`/product-details/${product._id}/${product.category._id}`}
+                                            to={`/product-details/${product._id}/${product.category._id}`}
                                             state={{
                                                 productId: product._id,
                                                 categoryId: product.category._id
@@ -159,13 +159,24 @@ export function SearchDesktopDrawer({ open, closeSearchDrawer }) {
                                                 {product.description.slice(0, 15) + '...'}
                                             </p>
                                             <div className='flex items-center gap-2 mt-2'>
+                                                {/* Final Price (always shown) */}
                                                 <p className='text-black text-sm xl:text-base lg:text-base font-semibold'>
-                                                    ₹{product.offerPrice % 1 >= 0.9 ? Math.ceil(product.offerPrice) : Math.floor(product.offerPrice)}
+                                                    ₹{product.offerPrice % 1 >= 0.9
+                                                        ? Math.ceil(product.offerPrice)
+                                                        : Math.floor(product.offerPrice)
+                                                    }
                                                 </p>
-                                                <p className='text-black/70 text-xs xl:text-sm lg:text-sm line-through'>
-                                                    ₹{product.actualPrice % 1 >= 0.9 ? Math.ceil(product.actualPrice) : Math.floor(product.actualPrice)}
-                                                </p>
+       
+                                                {product.discount > 0 && (
+                                                    <p className='text-black/70 text-xs xl:text-sm lg:text-sm line-through'>
+                                                        ₹{product.actualPrice % 1 >= 0.9
+                                                            ? Math.ceil(product.actualPrice)
+                                                            : Math.floor(product.actualPrice)
+                                                        }
+                                                    </p>
+                                                )}
                                             </div>
+
                                         </div>
                                     </div>
                                 )

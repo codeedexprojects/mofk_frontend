@@ -147,13 +147,13 @@ const LatestProducts = () => {
                 {/* Product Image */}
                 <div className="relative overflow-hidden rounded-lg">
                   <Link
-                                                          to={`/product-details/${product?._id}/${product?.category?.[0]?._id}`}
-                                                          state={{
-                                                              productId: product?._id,
-                                                              categoryId: product?.category?.[0]?._id
-                                                          }}
-                                                          className="cursor-pointer"
-                                                      >
+                    to={`/product-details/${product?._id}/${product?.category?.[0]?._id}`}
+                    state={{
+                      productId: product?._id,
+                      categoryId: product?.category?.[0]?._id
+                    }}
+                    className="cursor-pointer"
+                  >
                     <img
                       src={product.images[0]}
                       alt={product.title}
@@ -200,10 +200,15 @@ const LatestProducts = () => {
                       <p className="text-black font-semibold text-sm md:text-base">
                         ₹{Math.round(product.offerPrice)}
                       </p>
-                      <p className="text-gray-400 line-through text-xs md:text-sm">
-                        ₹{Math.round(product.actualPrice)}
-                      </p>
+
+                     
+                      {product.discount > 0 && (
+                        <p className="text-gray-400 line-through text-xs md:text-sm">
+                          ₹{Math.round(product.actualPrice)}
+                        </p>
+                      )}
                     </div>
+
                   </div>
                 </div>
 

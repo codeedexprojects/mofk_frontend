@@ -99,15 +99,15 @@ const UserWishlist = () => {
                                         onClick={() => handleWishlistDelete(product.productId._id, product.productId?.title)}
                                         className='text-deleteBg absolute -top-5 right-1 cursor-pointer'
                                     />
-                                   <Link
-                                                                           to={`/product-details/${product?.productId?._id}/${product?.productId?.category?.[0]?._id}`}
-                                   
-                                                                           state={{
-                                                                               productId: product?.productId?._id,
-                                                                               categoryId: product?.productId?.category?._id
-                                                                           }}
-                                                                           className="group"
-                                                                       >
+                                    <Link
+                                        to={`/product-details/${product?.productId?._id}/${product?.productId?.category?.[0]?._id}`}
+
+                                        state={{
+                                            productId: product?.productId?._id,
+                                            categoryId: product?.productId?.category?._id
+                                        }}
+                                        className="group"
+                                    >
                                         <div className='w-full h-52 xl:h-80 lg:h-80 rounded-xl overflow-hidden'>
                                             <img
                                                 src={product?.productId?.images[0]}
@@ -129,15 +129,29 @@ const UserWishlist = () => {
                                         <p className="text-gray-600 text-xs xl:text-sm truncate w-40 xl:w-60 lg:w-60">
                                             {product.productId.description}
                                         </p>
-                                        
+
                                         <div className='flex items-center gap-2 mt-2'>
-                                            <p className='text-black text-base xl:text-xl lg:text-xl font-semibold'>
-                                                ₹{product.productId.offerPrice % 1 >= 0.9 ? Math.ceil(product.productId.offerPrice) : Math.floor(product.productId.offerPrice)}
-                                            </p>
-                                            <p className='text-black/70 text-sm xl:text-base lg:text-base line-through'>
-                                                ₹{product.productId.actualPrice % 1 >= 0.9 ? Math.ceil(product.productId.actualPrice) : Math.floor(product.productId.actualPrice)}
-                                            </p>
-                                        </div>
+    
+    {/* Offer Price (always visible) */}
+    <p className='text-black text-base xl:text-xl lg:text-xl font-semibold'>
+        ₹{product.productId.offerPrice % 1 >= 0.9
+            ? Math.ceil(product.productId.offerPrice)
+            : Math.floor(product.productId.offerPrice)
+        }
+    </p>
+
+    {/* Actual Price (cut price) — show ONLY when discount > 0 */}
+    {product.productId.discount > 0 && (
+        <p className='text-black/70 text-sm xl:text-base lg:text-base line-through'>
+            ₹{product.productId.actualPrice % 1 >= 0.9
+                ? Math.ceil(product.productId.actualPrice)
+                : Math.floor(product.productId.actualPrice)
+            }
+        </p>
+    )}
+
+</div>
+
                                     </div>
 
                                 </div>

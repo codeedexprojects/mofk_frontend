@@ -66,7 +66,7 @@ const AllCategory = () => {
             setIsLoading(false);
         }
     };
-    
+
     useEffect(() => {
         fetchProducts();
     }, [productsCategory.id]);
@@ -221,13 +221,13 @@ const AllCategory = () => {
                     <ul className='grid grid-cols-2 gap-2 xl:flex xl:items-center xl:space-y-0 xl:gap-5 xl:justify-center
                          lg:flex lg:items-center lg:space-y-0 lg:gap-5 lg:justify-center'>
                         <li className='col-span-1'><FilterByCategory handleCategoryFilter={handleCategoryFilter} /></li>
-                       
+
                         <li className='col-span-1'><FilterBySize handleSizeFilter={handleSizeFilter} categoryId={productsCategory.id} /></li>
                         <li className='col-span-1'><FilterByMaterial handleMaterialFilter={handleMaterialFilter} categoryId={productsCategory.id} /></li>
                         <li className='col-span-1'><FilterByPrice handlePriceFilter={handlePriceFilter} /></li>
                     </ul>
 
-                     <div className='mt-5 '><FilterBySubCategory categoryId={productsCategory.id} handleSubCategory={handleSubCategory} /></div>
+                    <div className='mt-5 '><FilterBySubCategory categoryId={productsCategory.id} handleSubCategory={handleSubCategory} /></div>
 
                     {/* Products */}
                     <div className="xl:p-10 mt-6">
@@ -246,13 +246,13 @@ const AllCategory = () => {
                                     return (
                                         <div className='group relative' key={product._id}>
                                             <Link
-                                                                                    to={`/product-details/${product?._id}/${product?.category?.[0]?._id}`}
-                                                                                    state={{
-                                                                                        productId: product?._id,
-                                                                                        categoryId: product?.category?.[0]?._id
-                                                                                    }}
-                                                                                    className="cursor-pointer"
-                                                                                >
+                                                to={`/product-details/${product?._id}/${product?.category?.[0]?._id}`}
+                                                state={{
+                                                    productId: product?._id,
+                                                    categoryId: product?.category?.[0]?._id
+                                                }}
+                                                className="cursor-pointer"
+                                            >
                                                 <div className="w-full aspect-[2/3] rounded-xl overflow-hidden">
                                                     <img src={product.images[0]} alt="" className='w-full h-full object-cover rounded-xl shadow-md transition transform scale-100 duration-500 ease-in-out cursor-pointer group-hover:scale-105' onError={(e) => e.target.src = '/no-image.jpg'} />
                                                 </div>
@@ -294,12 +294,23 @@ const AllCategory = () => {
                                                 </div>
                                                 <div className='flex items-center gap-2 mt-2'>
                                                     <p className='text-black text-sm xl:text-base lg:text-base font-semibold'>
-                                                        ₹{product.offerPrice % 1 >= 0.9 ? Math.ceil(product.offerPrice) : Math.floor(product.offerPrice)}
+                                                        ₹{product.offerPrice % 1 >= 0.9
+                                                            ? Math.ceil(product.offerPrice)
+                                                            : Math.floor(product.offerPrice)
+                                                        }
                                                     </p>
-                                                    <p className='text-black/70 text-xs xl:text-sm lg:text-sm line-through'>
-                                                        ₹{product.actualPrice % 1 >= 0.9 ? Math.ceil(product.actualPrice) : Math.floor(product.actualPrice)}
-                                                    </p>
+
+                                                    {/* Show cut-price ONLY if discount > 0 */}
+                                                    {product.discount > 0 && (
+                                                        <p className='text-black/70 text-xs xl:text-sm lg:text-sm line-through'>
+                                                            ₹{product.actualPrice % 1 >= 0.9
+                                                                ? Math.ceil(product.actualPrice)
+                                                                : Math.floor(product.actualPrice)
+                                                            }
+                                                        </p>
+                                                    )}
                                                 </div>
+
                                             </div>
                                         </div>
                                     );

@@ -177,10 +177,15 @@ const FeaturedProducts = () => {
                       <p className="text-black font-semibold text-sm md:text-base">
                         ₹{Math.round(product.offerPrice)}
                       </p>
-                      <p className="text-gray-400 line-through text-xs md:text-sm">
-                        ₹{Math.round(product.actualPrice)}
-                      </p>
+
+                      
+                      {product.discount > 0 && (
+                        <p className="text-gray-400 line-through text-xs md:text-sm">
+                          ₹{Math.round(product.actualPrice)}
+                        </p>
+                      )}
                     </div>
+
                   </div>
                 </div>
               </div>
