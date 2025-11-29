@@ -15,6 +15,8 @@ const ListView = ({ products, isLoading, selectedProductId, setSelectedProductId
     const { open, handleOpen, modalType } = useContext(AppContext);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(10);
+    const totalItems = products.length; 
+
 
     // Get current items to display
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -88,8 +90,9 @@ const ListView = ({ products, isLoading, selectedProductId, setSelectedProductId
                                                     ? "p-4 text-center"
                                                     : "p-4 border-b border-gray-300 text-center";
 
-                                                // Calculate serial number based on current page
-                                                const serialNumber = (currentPage - 1) * itemsPerPage + index + 1;
+                                               const serialNumber =
+  totalItems - ((currentPage - 1) * itemsPerPage + index);
+
 
                                                 return (
                                                     <tr key={product._id}>
