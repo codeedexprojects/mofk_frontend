@@ -29,7 +29,7 @@ export const ProductDetailsModal = ({ open, handleOpen, productId }) => {
         setIsLoading(true);
         setError(null);
         try {
-            const response = await fetch(`https://mofk-backend.onrender.com/api/admin/products/product/${id}`);
+            const response = await fetch(`https://mofkin.com/api/admin/products/product/${id}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
