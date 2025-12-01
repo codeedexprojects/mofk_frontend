@@ -68,11 +68,12 @@ const SecondCarousel = () => {
             className="w-full h-full"
           >
             <img
-              src={carousel[currentSlide]?.image}
-              alt={`Image showcasing ${carousel[currentSlide]?.title}`}
-              className="w-full h-full object-cover"
-              onError={(e) => e.target.src = '/banner-no-image.jpg'}
-            />
+  src={carousel[currentSlide]?.image}
+  alt={`Image showcasing ${carousel[currentSlide]?.title}`}
+  className="w-full h-full object-cover object-right md:object-center"
+  onError={(e) => (e.target.src = '/banner-no-image.jpg')}
+/>
+
             
             {/* Dark Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>

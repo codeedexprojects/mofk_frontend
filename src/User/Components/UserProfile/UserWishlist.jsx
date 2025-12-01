@@ -131,26 +131,26 @@ const UserWishlist = () => {
                                         </p>
 
                                         <div className='flex items-center gap-2 mt-2'>
-    
-    {/* Offer Price (always visible) */}
-    <p className='text-black text-base xl:text-xl lg:text-xl font-semibold'>
-        ₹{product.productId.offerPrice % 1 >= 0.9
-            ? Math.ceil(product.productId.offerPrice)
-            : Math.floor(product.productId.offerPrice)
-        }
-    </p>
 
-    {/* Actual Price (cut price) — show ONLY when discount > 0 */}
-    {product.productId.discount > 0 && (
-        <p className='text-black/70 text-sm xl:text-base lg:text-base line-through'>
-            ₹{product.productId.actualPrice % 1 >= 0.9
-                ? Math.ceil(product.productId.actualPrice)
-                : Math.floor(product.productId.actualPrice)
-            }
-        </p>
-    )}
+                                            {/* Offer Price (always visible) */}
+                                            <p className='text-black text-base xl:text-xl lg:text-xl font-semibold'>
+                                                ₹{product.productId.offerPrice % 1 >= 0.9
+                                                    ? Math.ceil(product.productId.offerPrice)
+                                                    : Math.floor(product.productId.offerPrice)
+                                                }
+                                            </p>
 
-</div>
+                                            {/* Actual Price (cut price) — show ONLY when discount > 0 */}
+                                            {product.productId.discount > 0 && (
+                                                <p className='text-black/70 text-sm xl:text-base lg:text-base line-through'>
+                                                    ₹{product.productId.actualPrice % 1 >= 0.9
+                                                        ? Math.ceil(product.productId.actualPrice)
+                                                        : Math.floor(product.productId.actualPrice)
+                                                    }
+                                                </p>
+                                            )}
+
+                                        </div>
 
                                     </div>
 
