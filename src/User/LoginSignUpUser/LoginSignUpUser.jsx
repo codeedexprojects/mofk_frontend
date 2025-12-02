@@ -9,7 +9,7 @@ import axios from "axios";
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AppContext } from "../../StoreContext/StoreContext";
 
 export function LoginSignUpUser() {
@@ -33,7 +33,34 @@ export function LoginSignUpUser() {
         number: false,
         special: false,
     });
-    const redirectTo = window.location.pathname + window.location.search;
+
+    const location = useLocation();
+    const redirectTo =
+        new URLSearchParams(location.search).get("redirect") ||
+        (window.history.state?.usr?.from || "/");
+        const googleToken = new URLSearchParams(location.search).get("Token");
+const googleUserId = new URLSearchParams(location.search).get("userId");
+const googleName = new URLSearchParams(location.search).get("name");
+const googleRole = new URLSearchParams(location.search).get("role");
+React.useEffect(() => {
+    if (googleToken) {
+        // Save user data
+        localStorage.setItem("userToken", googleToken);
+        localStorage.setItem("userId", googleUserId);
+        localStorage.setItem("name", googleName);
+        localStorage.setItem("role", googleRole);
+
+        // Clean URL after saving
+        const newUrl = location.pathname;
+        window.history.replaceState({}, document.title, newUrl);
+
+        // Redirect user back
+        navigate(redirectTo);
+        toast.success("Login Successful");
+    }
+}, [googleToken]);
+
+
 
 
     const handleInputChange = (e) => {
@@ -261,47 +288,47 @@ export function LoginSignUpUser() {
                             />
                         </div>
 
-                       <div className="flex items-center border-[1px] rounded-lg pr-3 !border-gray-300 bg-white">
-    <Input
-        type={passwordVisible ? "text" : "password"}
-        value={loginFormData.password}
-        onChange={handleInputChange}
-        name="password"
-        size="lg"
-        placeholder="Password"
-        className="border-none placeholder:text-blue-gray-300 !font-custom placeholder:font-custom placeholder:opacity-100 focus:border-gray-300 focus:border-[1px]"
-        labelProps={{
-            className: "before:content-none after:content-none",
-        }}
-    />
+                        <div className="flex items-center border-[1px] rounded-lg pr-3 !border-gray-300 bg-white">
+                            <Input
+                                type={passwordVisible ? "text" : "password"}
+                                value={loginFormData.password}
+                                onChange={handleInputChange}
+                                name="password"
+                                size="lg"
+                                placeholder="Password"
+                                className="border-none placeholder:text-blue-gray-300 !font-custom placeholder:font-custom placeholder:opacity-100 focus:border-gray-300 focus:border-[1px]"
+                                labelProps={{
+                                    className: "before:content-none after:content-none",
+                                }}
+                            />
 
-    <button
-        type="button"
-        onClick={() => setPasswordVisible(!passwordVisible)}
-        className="cursor-pointer text-gray-500 focus:outline-none"
-    >
-        {passwordVisible ? (
-            <FaRegEye className="text-xl" />
-        ) : (
-            <FaRegEyeSlash className="text-xl" />
-        )}
-    </button>
-</div>
+                            <button
+                                type="button"
+                                onClick={() => setPasswordVisible(!passwordVisible)}
+                                className="cursor-pointer text-gray-500 focus:outline-none"
+                            >
+                                {passwordVisible ? (
+                                    <FaRegEye className="text-xl" />
+                                ) : (
+                                    <FaRegEyeSlash className="text-xl" />
+                                )}
+                            </button>
+                        </div>
 
-{/* ✅ SHOW RULES BELOW THE INPUT FIELD */}
-{loginSignUpUser !== "login" && loginFormData.password && (
-    <div className="mt-2 bg-gray-50 border border-gray-200 rounded-lg p-3 shadow-sm">
-        <p className="text-xs font-medium text-gray-700 mb-2">Password must contain:</p>
+                        {/* ✅ SHOW RULES BELOW THE INPUT FIELD */}
+                        {loginSignUpUser !== "login" && loginFormData.password && (
+                            <div className="mt-2 bg-gray-50 border border-gray-200 rounded-lg p-3 shadow-sm">
+                                <p className="text-xs font-medium text-gray-700 mb-2">Password must contain:</p>
 
-        <div className="space-y-1">
-            <PasswordRule label="At least 8 characters" completed={passwordRules.length} />
-            <PasswordRule label="One uppercase letter (A–Z)" completed={passwordRules.uppercase} />
-            <PasswordRule label="One lowercase letter (a–z)" completed={passwordRules.lowercase} />
-            <PasswordRule label="One number (0–9)" completed={passwordRules.number} />
-            <PasswordRule label="One special character (!@#$%^&*)" completed={passwordRules.special} />
-        </div>
-    </div>
-)}
+                                <div className="space-y-1">
+                                    <PasswordRule label="At least 8 characters" completed={passwordRules.length} />
+                                    <PasswordRule label="One uppercase letter (A–Z)" completed={passwordRules.uppercase} />
+                                    <PasswordRule label="One lowercase letter (a–z)" completed={passwordRules.lowercase} />
+                                    <PasswordRule label="One number (0–9)" completed={passwordRules.number} />
+                                    <PasswordRule label="One special character (!@#$%^&*)" completed={passwordRules.special} />
+                                </div>
+                            </div>
+                        )}
 
 
 
