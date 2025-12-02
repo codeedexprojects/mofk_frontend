@@ -19,7 +19,7 @@ import SizeCharts from './Admin/Components/MainComponents/SizeChart/SizeChart';
 
 
 import ScrollToTop from "./ScrollToTop";
-import { LoginSignUpUser } from './User/LoginSignUpUser/LoginSignUpUser';
+import  {LoginSignUpUser}  from './User/LoginSignUpUser/LoginSignUpUser';
 import { Otp } from './User/Otp/Otp';
 import UserHome from './User/Home/Home';
 import UserNavbar from './User/Components/Navbar/Navbar';
@@ -55,6 +55,7 @@ import MaterialsList from './Admin/Components/MainComponents/Material/AddMateria
 import ProductSpecifications from './Admin/Components/MainComponents/Specifications/AddSpecifications';
 import ContactForm from './User/Components/ContactUs/ContactForm';
 import SecondCarousel from './Admin/Components/MainComponents/SecondCarousel/SecondCarousel';
+import { SignUp } from './User/LoginSignUpUser/SIgnup';
 
 
 const FullRoutes = () => {
@@ -82,6 +83,7 @@ const RoutesWithLocation = () => {
                 {/* Routes of user section */}
                 <Route path='/' element={<UserHome />} />
                 <Route path='/login-user' element={<LoginSignUpUser />} />
+                <Route path='/signup' element={<SignUp />} />
                 <Route path='/otp' element={<Otp />} />
                 <Route path='/product-details/:productId/:categoryId?' element={<ProductDetails />} />
                 <Route path='/customer-reviews' element={<CustomerReviews />} />

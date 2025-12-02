@@ -27,14 +27,17 @@ export function UserNotLoginPopup({ open, handleOpen }) {
                         To continue, please log in to your account.
                     </Typography>
                     <Link
-                        to={`/login-user?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`}
+                        to="/login-user"
                         className="focus:outline-none"
+                        onClick={() => console.log("Login link clicked")}
                     >
-                        <Button className="w-32 bg-black text-sm capitalize font-normal">
+                        <Button
+                            // onClick={handleOpenUserNotLogin}
+                            className="w-32 bg-black text-sm capitalize font-normal"
+                        >
                             <span>Log in</span>
                         </Button>
                     </Link>
-
                 </DialogBody>
             </Dialog>
         </>

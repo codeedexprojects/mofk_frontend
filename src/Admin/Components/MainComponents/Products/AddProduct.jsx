@@ -44,6 +44,8 @@ const AddProduct = () => {
     other: [],
   });
   const [loading, setLoading] = useState(true);
+  const [hasRestored, setHasRestored] = useState(false);
+
 
   useEffect(() => {
     const fetchMaterials = async () => {
@@ -110,7 +112,33 @@ const AddProduct = () => {
   const [productManuAddress, setProductManuAddress] = useState('');
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
-  const [filteredSubCategories, setFilteredSubCategories] = useState([]); //for getting subcategory having same catgeory id
+  const [filteredSubCategories, setFilteredSubCategories] = useState([]);
+  useEffect(() => {
+    const saved = localStorage.getItem("addProductForm");
+    if (saved) {
+      const form = JSON.parse(saved);
+
+      setProductTitle(form.productTitle || "");
+      setProductCategory(form.productCategory || []);
+      setProductSubCategory(form.productSubCategory || []);
+      setProductCode(form.productCode || "");
+      setProductActualPrice(form.productActualPrice || "");
+      setProductDiscount(form.productDiscount || "");
+      setProductOfferPrice(form.productOfferPrice || "");
+      setCheckboxes(form.checkboxes || {});
+      setSpecifications(form.specifications || {});
+      setAttributeFields(form.attributeFields || [{ color: "", sizes: [{ size: "", stock: "" }] }]);
+      setProductDescription(form.productDescription || "");
+      setProductManuName(form.productManuName || "");
+      setProductManuBrand(form.productManuBrand || "");
+      setProductManuAddress(form.productManuAddress || "");
+      setSelectedSizeChartRefs(form.selectedSizeChartRefs || []);
+    }
+
+    setHasRestored(true); // 🔥 very important
+  }, []);
+
+
 
   // handle image
   const handleProductImageUpload = (e) => {
@@ -274,6 +302,46 @@ const AddProduct = () => {
     };
     fetchSubCategories();
   }, []);
+  useEffect(() => {
+  if (!hasRestored) return; // prevent overwriting saved data on first load
+
+  const formData = {
+    productTitle,
+    productCategory,
+    productSubCategory,
+    productCode,
+    productActualPrice,
+    productDiscount,
+    productOfferPrice,
+    checkboxes,
+    specifications,
+    attributeFields,
+    productDescription,
+    productManuName,
+    productManuBrand,
+    productManuAddress,
+    selectedSizeChartRefs,
+  };
+
+  localStorage.setItem("addProductForm", JSON.stringify(formData));
+}, [
+  hasRestored, // include this
+  productTitle,
+  productCategory,
+  productSubCategory,
+  productCode,
+  productActualPrice,
+  productDiscount,
+  productOfferPrice,
+  checkboxes,
+  specifications,
+  attributeFields,
+  productDescription,
+  productManuName,
+  productManuBrand,
+  productManuAddress,
+  selectedSizeChartRefs,
+]);
 
   // form submission
   const handleCreateProductSubmit = async (e) => {
@@ -426,6 +494,7 @@ const AddProduct = () => {
       );
       console.log(response.data);
       toast.success('Product is created');
+      localStorage.removeItem("addProductForm");
       navigate(-1);
       // Reset form
       setProductTitle('');
@@ -1312,7 +1381,7 @@ const AddProduct = () => {
                               className='border w-full bg-gray-100/50 p-2 rounded-md uppercase placeholder:text-sm focus:outline-none placeholder:capitalize'
                               required>
                               <option value=''>Select Size</option>
-                             
+
                               <optgroup label='Sizes'>
                                 <option value='S'>S</option>
                                 <option value='M'>M</option>

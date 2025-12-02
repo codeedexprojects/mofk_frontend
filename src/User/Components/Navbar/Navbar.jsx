@@ -104,43 +104,43 @@ const UserNavbar = () => {
     const token = localStorage.getItem("userToken")
 
     // Extract Google signup details from URL parameters
-    // useEffect(() => {
-    //     // Extract query parameters from the URL
-    //     const urlParams = new URLSearchParams(location.search);
-    //     const googleToken = urlParams.get("Token");
-    //     const googleRole = urlParams.get("role");
-    //     const googleUserId = urlParams.get("userId");
-    //     const googleName = urlParams.get("name");
+    useEffect(() => {
+        // Extract query parameters from the URL
+        const urlParams = new URLSearchParams(location.search);
+        const googleToken = urlParams.get("Token");
+        const googleRole = urlParams.get("role");
+        const googleUserId = urlParams.get("userId");
+        const googleName = urlParams.get("name");
 
-    //     // Debugging: Log extracted values
-    //     console.log("URL Params:", {
-    //         googleToken,
-    //         googleRole,
-    //         googleUserId,
-    //         googleName,
-    //         fullSearch: location.search,
-    //     });
+        // Debugging: Log extracted values
+        console.log("URL Params:", {
+            googleToken,
+            googleRole,
+            googleUserId,
+            googleName,
+            fullSearch: location.search,
+        });
 
-    //     // Store these details in local storage if they exist
-    //     if (googleToken) localStorage.setItem("userToken", googleToken);
-    //     if (googleRole) localStorage.setItem("role", googleRole);
-    //     if (googleUserId) localStorage.setItem("userId", googleUserId);
-    //     if (googleName) localStorage.setItem("name", googleName);
+        // Store these details in local storage if they exist
+        if (googleToken) localStorage.setItem("userToken", googleToken);
+        if (googleRole) localStorage.setItem("role", googleRole);
+        if (googleUserId) localStorage.setItem("userId", googleUserId);
+        if (googleName) localStorage.setItem("name", googleName);
 
-    //     // Confirm what was stored
-    //     console.log("Stored in localStorage:", {
-    //         googleToken: localStorage.getItem("userToken"),
-    //         googleRole: localStorage.getItem("role"),
-    //         googleUserId: localStorage.getItem("userId"),
-    //         googleName: localStorage.getItem("name"),
-    //     });
+        // Confirm what was stored
+        console.log("Stored in localStorage:", {
+            googleToken: localStorage.getItem("userToken"),
+            googleRole: localStorage.getItem("role"),
+            googleUserId: localStorage.getItem("userId"),
+            googleName: localStorage.getItem("name"),
+        });
 
-    //     // Optional: Clear URL parameters after storing to clean up the URL
-    //     if (googleToken || googleRole || googleUserId || googleName) {
-    //         const newUrl = window.location.pathname;
-    //         window.history.replaceState({}, document.title, newUrl);
-    //     }
-    // }, [location.search]);
+        // Optional: Clear URL parameters after storing to clean up the URL
+        if (googleToken || googleRole || googleUserId || googleName) {
+            const newUrl = window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        }
+    }, [location.search]);
 
     // pages where navbar don't visible
     const noNavbar = ["/customer-reviews", "/write-review", "/add-delivery-address", "/edit-delivery-address", "/select-delivery-address",
