@@ -33,6 +33,7 @@ export function LoginSignUpUser() {
         number: false,
         special: false,
     });
+    const redirectTo = window.location.pathname + window.location.search;
 
 
     const handleInputChange = (e) => {
@@ -413,9 +414,9 @@ export function LoginSignUpUser() {
                         <button
                             onClick={() =>
                                 window.open(
-                                    `${BASE_URL}/user/auth/google`,
-                                    "_self"
-                                )
+    `${BASE_URL}/user/auth/google?redirect=${encodeURIComponent(redirectTo)}`,
+    "_self"
+)
                             }
                             className="flex items-center justify-center gap-2 border border-gray-300 bg-white w-full text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-50 transition-colors"
                         >
