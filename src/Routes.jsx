@@ -56,6 +56,7 @@ import ProductSpecifications from './Admin/Components/MainComponents/Specificati
 import ContactForm from './User/Components/ContactUs/ContactForm';
 import SecondCarousel from './Admin/Components/MainComponents/SecondCarousel/SecondCarousel';
 import { SignUp } from './User/LoginSignUpUser/SIgnup';
+import TestimonialsManagement from './Admin/Components/MainComponents/Testimonials/TestimonialManage';
 
 
 const FullRoutes = () => {
@@ -134,6 +135,7 @@ const RoutesWithLocation = () => {
                     <Route path='sizechart' element={<PrivateRoute><SizeCharts /></PrivateRoute>} />
                     <Route path='material' element={<PrivateRoute><MaterialsList /></PrivateRoute>} />
                     <Route path='specifications' element={<PrivateRoute><ProductSpecifications /></PrivateRoute>} />
+                    <Route path='testimonials' element={<PrivateRoute><TestimonialsManagement /></PrivateRoute>} />
                 </Route>
                 <Route path='*' element={<NotFound />} />
             </Routes>

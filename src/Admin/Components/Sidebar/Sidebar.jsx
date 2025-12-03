@@ -13,6 +13,7 @@ import { RiCouponLine } from "react-icons/ri";
 import { PiUsersBold } from "react-icons/pi";
 import { Link, useLocation } from "react-router-dom";
 import { GiRolledCloth } from "react-icons/gi";
+import { User2Icon } from "lucide-react";
 
 export function AppSidebar() {
     const location = useLocation();
@@ -32,7 +33,8 @@ export function AppSidebar() {
         "/adminHome/userslist": "userslist",
         "/adminHome/userDetails": "userslist",
         "/adminHome/sizechart":"sizechart",
-         "/adminHome/specifications":"specifications"
+         "/adminHome/specifications":"specifications",
+         "/adminHome/testimonials":"testimonials",
     };
     
     const [activeLink, setActiveLink] = useState(pathMap[location.pathname] || "dashboard");
@@ -62,6 +64,7 @@ export function AppSidebar() {
                     { to: "/adminHome/secondcarousel", label: "Second Carousel", icon: MdOutlineViewCarousel, key: "secondcarousel" },
                     { to: "/adminHome/sizechart", label: "Size Chart", icon: TbRulerMeasure, key: "sizechart" },
                     { to: "/adminHome/specifications", label: "Specifications", icon: GiRolledCloth, key: "specifications" },
+                    { to: "/adminHome/testimonials", label: "Testimonials", icon: User2Icon, key: "testimonials" },
                     { to: "/adminHome/delivery", label: "Delivery", icon: TbTruckDelivery, key: "delivery" },
                     { to: "/adminHome/coupon", label: "Coupons", icon: RiCouponLine, key: "coupon" },
                     { to: "/adminHome/userslist", label: "Users List", icon: PiUsersBold, key: "userslist" },
