@@ -58,11 +58,11 @@ const TermsConditions = () => {
                 <p className="mb-4">
                     <strong>MOFK</strong>
                     <br />
-                    MOFK Store - Adam square, Angamaly - 680308
+                    MOFK Store - Perinthalmanna , Malappuram - Kerala , India - 679322
                     <br />
-                    Phone: +91 79942 37001
+                    Phone: +91 919037065007
                     <br />
-                    Email: mofkonline@gmail.com
+                    Email: mofkclothing.1n@gmail.com
                 </p>
             </div>
         </>

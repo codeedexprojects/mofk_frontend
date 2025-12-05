@@ -80,16 +80,16 @@ const Footer = () => {
                   Shipping Policy
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to='/refund-policy' className='text-gray-700 text-sm hover:text-gray-900 transition-colors'>
                   Cancellation Policy
                 </Link>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <Link to='/refund-policy' className='text-gray-700 text-sm hover:text-gray-900 transition-colors'>
                   Refund Policy
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
